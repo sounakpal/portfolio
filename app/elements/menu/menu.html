@@ -13,7 +13,7 @@
             right: 20px;
             cursor: pointer;
         }
-        
+
         #hamburger {
             padding: 10px 35px 16px 0px;
             z-index: 99;
@@ -23,7 +23,7 @@
         #hamburger:hover{
             transform:rotate(90deg);
         }
-        
+
         #hamburger span,
         #hamburger span:before,
         #hamburger span:after {
@@ -35,38 +35,38 @@
             display: block;
             content: '';
         }
-        
+
         #hamburger span:before {
             top: -10px;
         }
-        
+
         #hamburger span:after {
             bottom: -10px;
         }
-        
+
         #hamburger span,
         #hamburger span:before,
         #hamburger span:after {
             transition: all 110ms ease-in-out;
         }
-        
+
         #hamburger.active span {
             background-color: transparent!important;
         }
-        
+
         #hamburger.active span:before,
         #hamburger.active span:after {
             top: 0;
         }
-        
+
         #hamburger.active span:before {
             transform: rotate(45deg);
         }
-        
+
         #hamburger.active span:after {
             transform: rotate(-45deg);
         }
-        
+
         .menu__overlay {
             background: rgba(0, 0, 0, 0.7);
             display: none;
@@ -82,7 +82,7 @@
         }
         iron-selector a{
             @apply(--header-text);
-            
+
             color: var(--grey-rgba);
             text-align: center;
             padding: 15px 0;
@@ -108,13 +108,13 @@
                 <iron-selector
                  attr-for-selected="name"
                 on-iron-activate="_activeMenu"
-                id="selector" 
+                id="selector"
                 selected="{{selected}}">
-                    <a href="/" name="home">home</a>
-                    <a href="/sounakcan" name="sounakcan">what I can do</a>
-                    <a href="/work" name="work">what I have done</a>
-                    <a href="/login" name="login">login</a>
-                    <a href="/connect" name="connect">stay connected</a>
+                    <a href="{{baseUrl}}/" name="home">home</a>
+                    <a href="{{baseUrl}}/sounakcan" name="sounakcan">what I can do</a>
+                    <a href="{{baseUrl}}/work" name="work">what I have done</a>
+                    <a href="{{baseUrl}}/login" name="login">login</a>
+                    <a href="{{baseUrl}}/connect" name="connect">stay connected</a>
                 </iron-selector>
             </div>
         </div>
@@ -125,11 +125,14 @@ Polymer({
     is: 'e-menu',
 
     properties: {
+
         active: {
             type: Boolean,
             reflectToAttribute: true,
             value: false
         },
+
+        baseUrl:String,
 
         selected:{
             type:String,

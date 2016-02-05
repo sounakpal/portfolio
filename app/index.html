@@ -50,7 +50,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <!-- endbuild -->
-
+  <script>'https:'!==window.location.protocol&&(window.location.protocol='https')</script>
   <!-- Because this project uses vulcanize this should be your only html import
        in this file. All other imports should go in elements.html -->
   <link rel="import" href="elements/elements.html">
@@ -66,7 +66,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 100%;
         overflow: hidden;
     }
-    
+
     body {
         margin: 0;
     }
@@ -77,7 +77,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <span id="browser-sync-binding"></span>
   <template is="dom-bind" id="app">
 
-    <e-menu selected="{{route}}"></e-menu>
+    <e-menu base-url="{{baseUrl}}" selected="{{route}}"></e-menu>
         <iron-pages attr-for-selected="name" selected="{{route}}">
             <div name="home" id="home">
             	<e-scaffold></e-scaffold>
@@ -102,7 +102,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                  duration="6000"
                  text="Caching complete! This app will work offline.">
     </paper-toast>
-    
+
     <platinum-sw-register auto-register
                           clients-claim
                           skip-waiting
