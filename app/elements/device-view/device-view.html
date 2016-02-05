@@ -1,0 +1,55 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<!--
+Displays a page on a device layout.
+    <device-view device="phone" src="https://www.polymer-project.org/"></device-view>
+-->
+<dom-module id="device-view">
+
+  <link rel="import" type="css" href="device-view.css">
+
+  <template>
+    <style>
+      iframe::-webkit-scrollbar { width: 4px; height: 4px; background: transparent; }
+      iframe::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.5); -webkit-border-radius: 4px; border-radius: 4px; width: 4px; height: 4px; }
+
+    </style>
+    <iframe src="{{src}}"></iframe>
+      <!-- <content select="*"></content> -->
+  </template>
+
+  <script>
+    Polymer({
+      is: 'device-view',
+      properties: {
+        /**
+         * The url of the page to show.
+         */
+        src: String,
+        /**
+         * The device layout to show.  Possible values are `phone`, `tablet` and `laptop`.
+         */
+        device: {
+          type: String,
+          value: 'laptop',
+          reflectToAttribute: true
+        },
+        /**
+         * Use landscape orientaion if this is true.
+         */
+        landscape: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true
+        }
+      },
+      /**
+       * Toggles the landscape orientation.
+       */
+      toggleLandscape: function() {
+        this.landscape = !this.landscape;
+      }
+    });
+  </script>
+
+</dom-module>

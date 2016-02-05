@@ -1,0 +1,152 @@
+<!-- shared-styles.html -->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../shared-styles/shared-styles.html">
+<dom-module id="e-menu">
+    <template>
+        <style>
+        :host {
+            display: block;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+        }
+        
+        #hamburger {
+            padding: 10px 35px 16px 0px;
+            z-index: 99;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        #hamburger:hover{
+            transform:rotate(90deg);
+        }
+        
+        #hamburger span,
+        #hamburger span:before,
+        #hamburger span:after {
+            border-radius: 1px;
+            height: 5px;
+            width: 35px;
+            background: var(--grey-bbb);
+            position: absolute;
+            display: block;
+            content: '';
+        }
+        
+        #hamburger span:before {
+            top: -10px;
+        }
+        
+        #hamburger span:after {
+            bottom: -10px;
+        }
+        
+        #hamburger span,
+        #hamburger span:before,
+        #hamburger span:after {
+            transition: all 110ms ease-in-out;
+        }
+        
+        #hamburger.active span {
+            background-color: transparent!important;
+        }
+        
+        #hamburger.active span:before,
+        #hamburger.active span:after {
+            top: 0;
+        }
+        
+        #hamburger.active span:before {
+            transform: rotate(45deg);
+        }
+        
+        #hamburger.active span:after {
+            transform: rotate(-45deg);
+        }
+        
+        .menu__overlay {
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            position: fixed;
+            z-index: 98;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            @apply(--layout-center-justified);
+            @apply(--layout-center);
+            @apply(--layout-vertical);
+        }
+        iron-selector a{
+            @apply(--header-text);
+            
+            color: var(--grey-rgba);
+            text-align: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #505050;
+            text-decoration: none;
+            display: block;
+        }
+        iron-selector a:hover,
+        iron-selector .iron-selected{
+            transform:scale(1.1);
+            color: var(--grey-bbb);
+        }
+        iron-selector a:last-child{
+            border-bottom: 0;
+        }
+        </style>
+        <style include="shared-styles"></style>
+        <a id="hamburger" on-click="_activeMenu">
+            <span></span>
+        </a>
+        <div class="menu__overlay" hidden$="{{!active}}">
+            <div class="menu__content">
+                <iron-selector
+                 attr-for-selected="name"
+                on-iron-activate="_activeMenu"
+                id="selector" 
+                selected="{{selected}}">
+                    <a href="/" name="home">home</a>
+                    <a href="/sounakcan" name="sounakcan">what I can do</a>
+                    <a href="/work" name="work">what I have done</a>
+                    <a href="/login" name="login">login</a>
+                    <a href="/connect" name="connect">stay connected</a>
+                </iron-selector>
+            </div>
+        </div>
+    </template>
+</dom-module>
+<script>
+Polymer({
+    is: 'e-menu',
+
+    properties: {
+        active: {
+            type: Boolean,
+            reflectToAttribute: true,
+            value: false
+        },
+
+        selected:{
+            type:String,
+            value:'home',
+            notify:true
+        }
+    },
+
+
+    _activeMenu: function() {
+        if (this.active) {
+            this.$.hamburger.classList.remove('active');
+        } else {
+            this.$.hamburger.classList.add('active');
+        }
+        this.active = !this.active;
+    }
+
+});
+</script>

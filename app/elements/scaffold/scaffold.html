@@ -1,0 +1,52 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../sun/sun.html">
+<link rel="import" href="../sun/rain.html">
+<link rel="import" href="../animate/animate.html">
+<link rel="import" href="../shared-styles/shared-styles.html">
+<dom-module is="e-scaffold">
+    <template>
+        <style include="shared-styles">
+            e-rain,
+            e-sun,
+            #overlay {
+                @apply(--layout-fit);
+                z-index: -1;
+            }
+            #overlay {
+                background-color: rgba(255, 255, 255, 0.54);
+            }   
+        </style>
+        <div banner>
+            <e-sun>
+            </e-sun>
+            
+            <e-rain></e-rain>
+            <div id="overlay"></div>
+            <div banner__content>
+                <e-animate active="{{animate}}" animate-class="rollIn">
+                    <div banner__img>
+                    </div>
+                </e-animate>
+				<h5>Hi, I am</h5>
+                <e-animate delay="1s" banner__name active="{{animate}}" animate-class="bounceInUp">
+                    <h1>Sounak Pal.</h1>
+                </e-animate>
+                <e-animate banner__designation active="{{animate}}" delay="2s" animate-class="tada">
+                    <h4>Front-end developer</h4>
+                </e-animate>
+                <h5>by Proffesion. Based in India</h5>
+            </div>
+        </div>
+    </template>
+</dom-module>
+<script>
+Polymer({
+    is: 'e-scaffold',
+    properties:{
+        animate:{
+            type:Boolean,
+            value:false
+        }
+    }
+});
+</script>

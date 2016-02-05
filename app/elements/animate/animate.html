@@ -1,0 +1,79 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module is="e-animate">
+  <link rel="import" href="animate.css" type="css">
+  <template>
+    <div class="wow" id="target" data-wow-duration$="{{duration}}" data-wow-delay$="{{delay}}" data-wow-offset$="{{offset}}" data-wow-iteration$="{{iteration}}">
+      <content select="*"></content>
+    </div>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: 'e-animate',
+
+    properties: {
+
+        duration: String,
+
+        delay: String,
+
+        offset: Number,
+
+        iteration: Number,
+
+        animateClass: {
+        type: String,
+        observer: '_animateClass'
+        },
+        active: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+          /*,
+                    observer:'startAnimation'*/
+        }
+    },
+
+    attached: function() {
+      /*if(this.active){
+        new WOW().init();
+      }*/
+    },
+
+    ready: function() {
+        this.$.target.classList.add(this.animateClass);
+    },
+
+    _animateClass: function() {
+        if (this.active) {
+            this.$.target.classList.add(this.animateClass);
+        /* new WOW().init();*/
+        }
+    },
+    /*created: function() {
+        console.log(this.localName + '#' + this.id + ' was created');
+    },
+
+    attached: function() {
+        console.log(this.localName + '#' + this.id + ' was attached');
+    },
+
+    detached: function() {
+        console.log(this.localName + '#' + this.id + ' was detached');
+    },
+
+    attributeChanged: function(name, type) {
+        console.log(this.localName + '#' + this.id + ' attribute ' + name +
+      ' was changed to ' + this.getAttribute(name));
+    }*/
+    //To do :create plugin
+    //startAnimation:function(){
+    //  this.attached();
+    //}
+  });
+
+</script>

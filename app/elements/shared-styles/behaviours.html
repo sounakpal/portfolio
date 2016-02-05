@@ -1,0 +1,42 @@
+<script>
+    Polymer.PortfolioScrollBehaviour = {
+    	properties:{
+
+    		previousScrollPos: {
+    			type:Number,
+    			value:0
+    		},
+
+    		scrollPos: Number,
+
+    		scrollContainer:String,
+
+			fireScrollHappened: {
+			type: Function,
+			value: function() {
+			  		return this._scrollHappened.bind(this);
+				}
+			}
+
+    	},
+
+    ready:function(){
+    	console.log(this.scrollContainer);
+    	this.$.banner.addEventListener('scroll',this.fireScrollHappened,true);
+    },
+
+    _scrollHappened:function(e){
+    	this.scrollPos = e.target.scrollTop;
+    	//var initialHeight = window.innerHeight;
+    	var diff = this.scrollPos - this.previousScrollPos;
+
+		this.$.bannerText.style.top = this.$.bannerText.offsetTop + diff +'px';
+		this.$.bannerText.style.opacity = 1 - this.scrollPos/500;
+		this.$.overlay.style.background = 'rgba(255,255,255,' + 0 + this.scrollPos/1222 + ')';
+
+    	this.previousScrollPos = this.scrollPos;
+    }
+
+
+    };
+</script>

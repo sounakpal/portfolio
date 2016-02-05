@@ -1,0 +1,80 @@
+[{
+	"project":"Atom",
+	"name":"atom",
+	"date":"Aug 2014",
+	"company":"Tavisca",
+	"url":"http://atomproject.github.io/elements/",
+	"description":"An open source documentation site of all open source components created.",
+	"role":"Something to think and write",
+	"skills":"WebComponents, JS, HTML, PolymerJS, CSS"
+},
+{
+	"project":"Travelnxt Flight",
+	"name":"flight",
+	"date":"Aug 2014",
+	"company":"Tavisca",
+	"url":"http://mdemo.travelnxt.com/",
+	"description":"This is end to end flight booking portal",
+	"role":"Something to think and write",
+	"skills":"WebComponents, JS, HTML, PolymerJS, CSS, MVC"
+},
+{
+	"project":"Harman Kardon",
+	"name":"harman",
+	"date":"Aug 2014",
+	"company":"Harman",
+	"url":"http://harmankardon.com",
+	"description":"This is the ecommerce for Harmankardon.",
+	"role":"Something to think and write",
+	"skills":"Demandware, html, css, js, bootstrap, jquery"
+},
+{
+	"project":"JBL",
+	"name":"jbl",
+	"date":"Aug 2014",
+	"company":"Harman",
+	"url":"http://jbl.com",
+	"description":"This is the ecommerce for JBL.",
+	"role":"Something to think and write",
+	"skills":"Demandware, html, css, js, bootstrap, jquery"
+},
+{
+	"project":"Landsecurities",
+	"name":"landsecurities",
+	"date":"Aug 2014",
+	"company":"Synechron",
+	"url":"http://annualreport2014.landsecurities.com",
+	"description":"This is annual report for UK's real estate company.",
+	"role":"Something to think and write",
+	"skills":"html, css, js, bootstrap, jquery"
+},
+{
+	"project":"Mark Levinson",
+	"name":"mark&levinson",
+	"date":"Aug 2014",
+	"company":"Harman",
+	"url":"http://www.marklevinson.com/",
+	"description":"This is the ecommerce for Mark Levinson.",
+	"role":"Something to think and write",
+	"skills":"Demandware, html, css, js, bootstrap, jquery"
+},
+{
+	"project":"Silenor",
+	"name":"silenor",
+	"date":"Aug 2014",
+	"company":"Synechron",
+	"url":"http://www.silenor.com/",
+	"description":"This was a CMS for a US based drug Company.",
+	"role":"Something to think and write",
+	"skills":"html, css, js, bootstrap, jquery"
+},
+{
+	"project":"Travelnxt API",
+	"name":"demo",
+	"date":"Aug 2014",
+	"company":"Tavisca",
+	"url":"http://demo.travelnxt.com/dev/apis",
+	"description":"This is the documentation site of travelnxt apis.",
+	"role":"Something to think and write",
+	"skills":"html, css, js, bootstrap, jquery"
+}]

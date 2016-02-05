@@ -1,0 +1,215 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../animate/animate.html">
+<dom-module is="e-work-overlay">
+    <template>
+        <style>
+        :host {
+            display: block;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .heading {
+            @apply(--normal-text);
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+        
+        .content {
+            padding: 0 20px;
+            @apply(--message-text);
+            text-align: center;
+        }
+        
+        #body {
+            opacity: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: all 0.4s ease;
+            z-index: 2;
+            pointer-events: none;
+            cursor: default;
+            background: #fff;
+            padding: 20px 10;
+            overflow: auto;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        
+        .close {
+            position: absolute;
+            top: 0.4em;
+            right: 0.4em;
+            width: 2em;
+            height: 2em;
+            text-indent: -9000px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        .close:before {
+            content: 'x';
+            font-weight: 100;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-size: 3em;
+            line-height: 0.6;
+            text-align: center;
+            text-indent: 0px;
+        }
+        
+        @media(min-width: 768px) {
+            #body {
+                @apply(--layout-horizontal);
+                @apply(--layout-center-justified);
+                @apply(--layout-center);
+            }
+            .content {
+                @apply(--layout-flex);
+                @apply(--layout-vertical);
+            }
+            /* .image,
+            #body,
+            .image{
+            }
+            .image{
+                            @apply(--layout-center-justified);
+                            @apply(--layout-center);
+                            order:2;
+            } */
+        }
+        </style>
+        <div id="body">
+            <span class="close" on-click="closeClip"></span>
+            <!-- <e-animate class="image" active="{{active}}" delay="1s" animate-class="fadeInUp">
+                <div>
+                    <img id="img" src$="{{frontUrl}}" alt$="{{frontUrl}}" />
+                </div>
+            </e-animate> -->
+            <e-animate class="content" active="{{active}}" delay="1s" animate-class="fadeInUp">
+                <div>
+                    <div class="item-text">
+                        <h2 class="heading">Project</h2>
+                        <div class="heading">[[data.project]]</div>
+                        <span>[[data.description]]</span>
+                        <a href$="[[data.url]]" target="_blank">Check live</a>
+                    </div>
+                    <div class="item-text">
+                        <h2 class="heading">Date</h2>
+                        <div>[[data.date]]</div>
+                    </div>
+                    <div class="item-text">
+                        <h2 class="heading">My role:</h2>
+                        <div>[[data.role]]</div>
+                    </div>
+                    <div class="item-text">
+                        <h2 class="heading">While working for:</h2>
+                        <div>[[data.description]]</div>
+                    </div>
+                    <div class="item-text">
+                        <h2 class="heading">Skills Used</h2>
+                        <div>[[data.skills]]</div>
+                    </div>
+                </div>
+            </e-animate>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'e-work-overlay',
+        properties: {
+
+            data: {
+                type: Object,
+                value: function() {
+                    return null;
+                },
+                observer: '_getUrl'
+            },
+
+            widthOffset: {
+                type: Number,
+                value: 0,
+                observer: '_getUrl'
+            },
+            scrollPosition: {
+                type: Number
+            },
+
+            active: {
+                type: Boolean,
+                value: false,
+                notify: true
+            }
+        },
+
+        ready: function() {
+
+        },
+        _getUrl: function() {
+            if (this.active) {
+                this.animate();
+            }
+            if (!this.data) {
+                return;
+            }
+    if (this.widthOffset < 768) {
+        console.log('url(components/work/img/' + this.data.name + '-phone.png)');
+        this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-320.jpg)';
+    } else if (this.widthOffset >= 768 && this.widthOffset < 1024) {
+        this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-768.jpg)';
+    } else {
+        this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-1024.jpg)';
+    }
+        },
+
+        _setClip: function() {
+            this.clipClosed = 'rect(' + this.getBoundingClientRect().top + 'px ' + (this.getBoundingClientRect().left + this.offsetWidth) + 'px ' + (this.getBoundingClientRect().top + this.offsetHeight) + 'px ' + this.getBoundingClientRect().left + 'px)';
+            this.clipOpen = 'rect(0px ' + window.innerWidth + 'px ' + window.innerHeight + 'px 0px)';
+
+        },
+
+
+        animate: function() {
+            //initiate to find the correctpos
+            this._setClip();
+
+            this.$.body.style.clip = this.clipClosed;
+            this.$.body.style.opacity = 1;
+            this.$.body.style.zIndex = 9999;
+            this.$.body.style.pointerEvents = 'auto';
+            var comp = this;
+            setTimeout(function() {
+                comp.$.body.style.clip = comp.clipOpen;
+            }, 1000);
+
+            this.active = true;
+
+        },
+
+        closeClip: function(e) {
+            //initiate to find the correctpos
+            this._setClip();
+
+            this.$.body.style.clip = this.clipClosed;
+            var comp = this;
+            setTimeout(function() {
+                comp.$.body.style.opacity = 0;
+                comp.$.body.style.zIndex = -1;
+                comp.$.body.style.pointerEvents = 'none';
+            }, 1000);
+
+            this.active = false;
+            e.stopPropagation();
+        }
+
+    });
+    </script>
+</dom-module>

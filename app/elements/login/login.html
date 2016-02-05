@@ -1,0 +1,352 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-auth.html">
+<link rel="import" href="../shared-styles/shared-styles.html">
+<link rel="import" href="chat.html">
+<dom-module id="e-login">
+  <template>
+    <style>
+      :host{
+        display: block;
+        overflow: auto;
+        height: 100%;
+        @apply(--normal-text);
+      }
+      .fit{
+        @apply(--layout-fit);
+        @apply(--layout-horizontal);
+        @apply(--layout-center-justified);
+        @apply(--layout-center);
+        background: var(--grey-alpha);
+      }
+      button {
+        padding-left: 35px;
+        padding-right: 0px;
+        height: 35px;
+        background: none;
+        border: none;
+        display: block;
+        background-size: 25px 25px, cover;
+        background-position: 10px center, center center;
+        background-repeat: no-repeat, repeat;
+        border-radius: 4px;
+        color: white;
+        font-family:"Merriweather Sans", sans-serif;
+        font-size: 14px;
+        margin-bottom: 15px;
+        width: 205px;
+        border-bottom: 2px solid transparent;
+        border-left: 1px solid transparent;
+        border-right: 1px solid transparent;
+        box-shadow: 0 4px 2px -2px gray;
+        text-shadow: rgba(0, 0, 0, .4) -1px -1px 0;
+      }
+
+ .googleplus {
+    background-size: 30px 30px, cover;
+    background-image: url(gplus.png), -webkit-gradient(linear, left top, left bottom, color-stop(1%, #FF2E74), color-stop(100%, #CE1471));
+    ;
+}
+ .facebook {
+    background: url(facebookf.png), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4c74c4), color-stop(100%, #3b5998));
+    background-size: 25px 25px, cover;
+    background-position: 10px center, center center;
+    background-repeat: no-repeat, repeat;
+}
+ .twitter {
+    background-image: url(twitterbird.png), -webkit-gradient(linear, left top, left bottom, color-stop(1%, #00aced), color-stop(99%, #00a9ff));
+    ;
+}
+
+    .app,.chat{
+        @apply(--layout-horizontal);
+        height: 100%;
+        overflow: hidden;
+        background: #ecf0f1;
+    }
+    .app > *{
+        @apply(--layout-flex);
+        
+    }
+    .loginMenu{
+        @apply(--layout-vertical);
+    }
+    .loginMenu > *{
+        @apply(--layout-flex);
+        @apply(--layout-horizontal);
+        border-top: 1px solid var(--grey-bbb);
+
+        text-decoration: none;
+        width: 100%;
+    }
+    .links{
+      max-height: 38px;
+    }
+    .links > *{
+        @apply(--layout-flex);
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+        @apply(--layout-center-justified);
+        color: var(--grey-bbb);
+        background: var(--grey-alpha);
+        border-right: 1px solid var(--grey-bbb);
+
+        text-decoration: none;
+        padding: 10px 0;
+        width: 100%;
+    }
+    .links > *:hover{
+        background: var(--grey-bbb);
+        color: var(--grey-alpha);
+    }
+    e-chat{
+      height: 100%;
+      width: 100%;
+    }
+    .contact{
+
+        @apply(--layout-flex);
+    }
+    .text{
+      @apply(--layout-self-end);
+      color: var(--grey-bbb);
+      margin-bottom: 10px;
+    }
+.typo{
+  font-size: 1rem;
+  margin: 10px 0 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+  animation: type 4s steps(60, end); 
+}
+.typo:nth-child(2){
+  animation: type2 8s steps(60, end);
+}
+.typo a{
+  color: lime;
+  text-decoration: none;
+}
+
+.typo span{
+  animation: blink 1s infinite;
+}
+
+@keyframes type{ 
+  from { width: 0; } 
+} 
+
+@keyframes type2{
+  0%{width: 0;}
+  50%{width: 0;}
+  100%{ width: 100; } 
+} 
+
+@keyframes blink{
+  to{opacity: .0;}
+}
+
+.photo{
+  height:50%;
+  @apply(--layout-center);
+  @apply(--layout-center-justified);
+
+    background-size: contain;
+  background:  url(1.png) no-repeat center center;
+  animation-name: bgImage;
+  animation-duration: 1s; 
+  animation-timing-function: step-end; 
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 8;
+}
+
+@keyframes bgImage{
+  0%{background: #ecf0f1 url(1.png) no-repeat center center}
+  25%{background: #ecf0f1 url(3.png) no-repeat center center}
+  50%{background: #ecf0f1 url(2.png) no-repeat center center}
+  75%{background: #ecf0f1 url(1.png) no-repeat center center}
+  100%{ background: #ecf0f1 url(3.png) no-repeat center center} 
+} 
+
+::selection{
+  background: black;
+}
+    </style>
+    <firebase-auth id="firebaseLogin" params='{"rememberMe": true,"scope": "email,user_likes"}' user="{{user}}" status-known="{{statusKnown}}" location="https://sounak.firebaseio.com/" provider="{{provider}}" on-error="errorHandler" on-login="userSuccessHandler"></firebase-auth>
+
+    <!-- Firebase location:
+    <input value="https://sounak.firebaseio.com/" size="40" disabled>
+    <br>
+    
+    Provider type:
+    <select value="{{provider::change}}">
+      <option>facebook</option>
+      <option>github</option>
+      <option>google</option>
+      <option>twitter</option>
+      <option>password</option>
+    </select>
+    <em>Only 'anonymous', 'google', and 'password' are activated for demo Firebase account</em>
+    <br>
+    
+    <em>Required by some provider types</em>
+    <div id="message">[[message]]</div>
+    <br>
+    
+    <h3>Login status:</h3>
+    <p>{{computeLoginStatus(statusKnown, user)}}</p>
+    <h3>User ID:</h3>
+     <button on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}">Login</button>
+    <button on-tap="logout" class$="{{provider}}" hidden$="{{computeLogoutHidden(statusKnown, user)}}">Logout</button>
+    <pre>{{user.uid}}</pre> -->
+    
+    <template is="dom-if" if="{{computeLogoutHidden(statusKnown, user)}}">
+      <div class="fit">
+        <div class="social-wrap c">
+            <button on-click="login" class="facebook" value="facebook">Sign in with Facebook</button>
+            <button on-click="login" class="twitter" value="twitter">Sign in with Twitter</button>
+            <button on-click="login" class="googleplus" value="googleplus">Sign in with Google</button>
+        </div>
+      </div>
+    </template>
+   
+    <template is="dom-if" if="{{computeLoginHidden(statusKnown, user)}}">
+      <div class="app">
+        <div class="loginMenu">
+          
+          <div><span>Contact</span></div>
+          <div class="photo">
+            <div class="text"><em>
+              <div class="typo">hi folks, thanks for coming this far.</div>
+              <div class="typo">Post a comment on the right 
+              :)<span>|</span></div></em> 
+            </div>
+          </div>
+          <div class="links">
+            <a href=""><span>Resume</span></a>
+            <a href=""><span>Download</span> CV</a>
+            <a on-tap="logout" style="border:0"><span>Logout</span></a>
+          </div>
+        </div>
+        <div class="chat">
+          <e-chat user="{{user}}"></e-chat>
+        </div>
+      </div>
+    </template>
+    
+  </template>
+</dom-module>
+<script>
+
+      var ref = new Firebase('https://sounak.firebaseio.com/');
+  Polymer({
+    is: 'e-login',
+
+    properties: {
+
+      fireAdd:{
+        type: String,
+        value: ''
+      },
+
+      provider: {
+        type: String
+      },
+
+      message: {
+        type: String,
+        value: ''
+      },
+
+      user: {
+        type: Object,
+        value: null
+      },
+
+      reference: {
+        type: Object,
+        value: null
+      },
+
+      statusKnown: {
+        type: Boolean
+      }
+    },
+
+    login: function(e) {
+      var params;
+
+      try {
+        params = JSON.parse(this.params);
+      } catch (e) {
+        params = null;
+      }
+      console.log(e.srcElement.value);
+      this.provider = e.srcElement.value;
+      if (this.provider === 'password') {
+        params = params || {};
+        params.email = this.email;
+        params.password = this.password;
+      }
+
+      this.$.firebaseLogin.login(params);
+    },
+
+    logout: function() {
+      this.$.firebaseLogin.logout();
+    },
+
+    errorHandler: function(e) {
+      this.message = 'Error: ' + e.detail.message;
+    },
+
+    userSuccessHandler: function(e) {
+      console.log(e);
+      if(!this.user){
+        return;
+      }
+      var usersRef = ref.child('users');
+      var uid = e.detail.user.uid;
+      usersRef.child(uid).update({
+          'full_name': e.detail.user.facebook.displayName,
+          'email': e.detail.user.facebook.email,
+          'photo':e.detail.user.facebook.profileImageURL
+        });
+      this.message = e.type + ' success!';
+    },
+
+    computeLoginHidden: function(statusKnown, user) {
+      return !statusKnown || !!user;
+    },
+
+    computeLogoutHidden: function(statusKnown, user) {
+      return !statusKnown || !user;
+    },
+
+    computeLoginStatus: function(statusKnown, user) {
+      if (statusKnown && user) {
+        return 'Logged in';
+      }
+
+      if (statusKnown) {
+        return 'Logged out';
+      }
+
+      return 'Unknown (checking status...)';
+    }
+
+
+
+
+
+  });
+</script>

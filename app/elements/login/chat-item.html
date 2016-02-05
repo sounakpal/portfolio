@@ -1,0 +1,371 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-collection.html">
+<link rel="import" href="../shared-styles/shared-styles.html">
+<dom-module is="e-chat-item">
+    <template>
+        <style>
+        #body {
+            @apply(--layout-vertical);
+            @apply(--normal-text);
+            padding: 5px;
+            text-align: center;
+            box-shadow: 0px 1px 5px 1px #ccc;
+            margin: 5px;
+            -webkit-transform: scale(0);
+            -ms-transform: scale(0);
+            -o-transform: scale(0);
+            transform: scale(0);
+            -webkit-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+            transition: 0.3s all ease;
+        }
+        #body.active{
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            -o-transform: scale(1);
+            transform: scale(1);
+        }
+        .header {
+            @apply(--layout-horizontal);
+            @apply(--layout-start);
+
+            color: var(--grey-rgba);
+            font-size: 12px;
+        }
+        
+        .header> * {
+            @apply(--layout-flex);
+
+            user-select:none;
+        }
+        
+        .img img {
+            border-radius: 50%;
+            border: 6px solid var(--grey-alpha);
+            max-width: 100%;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        .likes {
+            @apply(--layout-horizontal);
+            text-align: left;
+            white-space: nowrap;
+        }
+        .name{
+          font-size: 1.2rem;
+          font-weight: 600;
+          margin-top: 5px;
+          color: var(--grey-rgba);
+        }
+        
+        .time {
+          text-align: right;
+        }
+        .message{
+          @apply(--message-text);
+          margin-top: 5px;
+          overflow: hidden;
+        }
+        #heart em{
+          color: var(--grey-alpha);
+        }
+        #heart,#delete {
+            position: relative;
+            padding: 2px 5px 2px 8px;
+            cursor: pointer;
+        } 
+        #delete {
+          padding: 2px 5px;
+        }
+        #heart.active .like,#heart .unlike{
+          display: none;
+        }
+        #heart.active .unlike{
+          display: inline;
+        }
+        #heart.active, .inactive{
+          -webkit-animation:scaling 0.2s linear ;
+          -moz-animation:scaling 0.2s linear ;
+          -o-animation:scaling 0.2s linear ;
+        }
+
+        #heart:before,
+        #heart:after {
+            z-index: -1;
+            position: absolute;
+            content: "";
+            left: 12px;
+            top: 0;
+            width: 12px;
+            height: 18.2px;
+            background: var(--grey-bbb);
+            -moz-border-radius: 50px 50px 0 0;
+            border-radius: 50px 50px 0 0;
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            -webkit-transform-origin: 0 100%;
+            -moz-transform-origin: 0 100%;
+            -ms-transform-origin: 0 100%;
+            -o-transform-origin: 0 100%;
+            transform-origin: 0 100%;
+        }
+        
+        #heart.active:before,
+        #heart.active:after{
+          background: red!important;
+        }
+        #heart:after {
+            left: 0;
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+            -webkit-transform-origin: 100% 100%;
+            -moz-transform-origin: 100% 100%;
+            -ms-transform-origin: 100% 100%;
+            -o-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
+        }
+
+        /* Other style */
+        :host([other-style]) .header .img {
+          -webkit-flex: 0;
+              -moz-flex: 0;
+              -ms-flex: 0;
+              -o-flex: 0;
+              flex: 0;    
+        }
+        :host([other-style]) img {
+          position: absolute;
+          left: -70px;
+          WIDTH: 60PX;
+          HEIGHT: 60PX;
+          top: -5px;
+        }
+        :host([other-style]) .name{
+          font-size: 0.75rem;
+        }
+        :host([other-style]) .time div{
+              display: inline-block;
+    margin-top: 2px;
+        }
+        :host([other-style]) #body{
+          MARGIN-left: 70px;
+          text-align: left;
+        }
+        @-webkit-keyframes scaling{
+          0% {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            -o-transform: scale(1);
+            transform: scale(1);
+          }
+        
+          50% {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            -o-transform: scale(1.1);
+            transform: scale(1.1);
+          }
+          100% {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            -o-transform: scale(1);
+            transform: scale(1);
+          }
+        }
+        @-moz-keyframes scaling{
+          0% {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            -o-transform: scale(1);
+            transform: scale(1);
+          }
+        
+          50% {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            -o-transform: scale(1.1);
+            transform: scale(1.1);
+          }
+          100% {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            -o-transform: scale(1);
+            transform: scale(1);
+          }
+        }
+        @keyframes scaling{
+          0% {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            -o-transform: scale(1);
+            transform: scale(1);
+          }
+        
+          50% {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            -o-transform: scale(1.1);
+            transform: scale(1.1);
+          }
+          100% {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            -o-transform: scale(1);
+            transform: scale(1);
+          }
+        }
+        </style>
+        <div id="body" class$="[[otherStyle]]">
+            <div id="triangle"></div>
+            <div class="header">
+                <div class="likes">
+                    <span id="heart" class$="{{getClassHeart(chatItem,user.uid)}}" on-tap="like">
+                      <em>[[getUserLikes(chatItem.likes)]]</em>
+                      <span>&nbsp;&nbsp;</span>
+                      <span class="like">like</span>
+                      <span class="unlike">unlike</span>
+                    </span>
+                    <template is="dom-if" if="{{checkCurrentUser(user,chatItem)}}">
+                      <span style="padding:2px 0"> | </span>
+                      <span id="delete" on-tap="removeChat">delete</span>
+                    </template>
+                </div>
+                <div class="img">
+                    <img src$="[[userData.photo]]" alt="" />
+                </div>
+                <div class="time">
+                    <div>[[getTime(chatItem.time)]]</div>
+                    <div>[[getDate(chatItem.time)]]</div>
+                </div>
+            </div>
+            <div class="name">[[userData.full_name]]</div>
+            <div class="message">[[chatItem.msg]]</div>
+        </div>
+    </template>
+</dom-module>
+<script>
+Polymer({
+    is: 'e-chat-item',
+
+    properties: {
+        user: {
+            type: Object,
+            value: null
+        },
+
+        chatItem: {
+            type: Object,
+            value: null,
+            observer: '_callForUserData',
+            notify:true
+        },
+
+
+        key: String,
+
+        userData: {
+            type: Object,
+            value: function() {
+                return {};
+            }
+        },
+
+        otherStyle:{
+          type:Boolean,
+          value:false,
+          reflectToAttribute:true
+
+        }
+
+    },
+
+    ready:function(){
+      this.$.body.classList.add('active');
+      this.fire('child-added');
+    },
+    checkCurrentUser:function(user,chatItem){
+      if(chatItem && user){
+        return chatItem.uid === user.uid;
+      }
+    },
+
+    getUserLikes: function(likes) {
+        likes = likes || {};
+        return Object.keys(likes).length;
+    },
+    getDate: function(time) {
+      time = new Date(time);
+      var day  = time.getDate();
+      day = day > 9 ? day : '0' + day;
+      var month = time.getMonth();
+      month= month > 8 ? (month + 1 ): '0' + (month+1);
+      var year = time.getFullYear();
+      return day +'/' + month + '/' + year;
+    },
+
+    getTime:function(time){
+      time = new Date(time);
+      var hour = time.getHours();
+      hour= hour> 9 ? hour : '0' + hour;
+      var minutes = time.getMinutes();
+      minutes=minutes> 9 ? minutes : '0' + minutes;
+      return hour + ':' + minutes;
+    },
+
+    getClassHeart:function (obj, value) {
+      obj = obj.likes || {};
+      for(var id in obj) {
+        if(obj[id] === value) {
+          return 'active';
+        }
+      }
+      return 'inactive';
+    },
+    like:function(){
+      var key;
+    function checkDuplicate(obj, value) {
+      obj = obj || {};
+      for(var id in obj) {
+        if(obj[id] === value) {
+          key = id;
+          return true;
+        }
+      }
+      return false;
+    }
+
+    if(checkDuplicate(this.chatItem.likes, this.user.uid)) { 
+        this.fire('remove-like',{
+          'item':this.chatItem,
+          'key':key
+        });
+      }else{
+      this.fire('like',this.chatItem);
+      }
+    },
+
+    removeChat:function(){
+      this.fire('remove-item',this.chatItem);
+    },
+
+    _callForUserData: function() {
+        var ref = new Firebase('https://sounak.firebaseio.com/users/' + this.chatItem.uid);
+        var comp = this;
+        // Attach an asynchronous callback to read the data at our posts reference
+        ref.on('value', function(snapshot) {
+            comp.userData = snapshot.val();
+        }, function(errorObject) {
+            console.log('The read failed: ' + errorObject.code);
+        });
+
+    }
+});
+</script>
