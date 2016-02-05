@@ -1,0 +1,16 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content=""><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Sounak Pal Portofolio"><title>Sounak Pal Portofolio</title><meta name=theme-color content=#2E3AA1><link rel=manifest href=manifest.json><meta name=msapplication-TileColor content=#3372DF><meta name=mobile-web-app-capable content=yes><meta name=application-name content=PSK><link rel=icon sizes=192x192 href=images/touch/chrome-touch-icon-192x192.png><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=apple-mobile-web-app-title content="Sounak Pal Portofolio"><link rel=apple-touch-icon href=images/touch/apple-touch-icon.png><meta name=msapplication-TileImage content=images/touch/ms-touch-icon-144x144-precomposed.png><link rel=stylesheet href=styles/main.css><script src=bower_components/webcomponentsjs/webcomponents-lite.min.js></script><script>'https:'!==window.location.protocol&&(window.location.protocol='https')</script><link rel=import href=elements/elements.html><style is=custom-style include=shared-styles></style><style>html,
+    body,
+    e-scaffold,
+    iron-pages,
+    iron-pages >div {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    body {
+        margin: 0;
+    }</style><body unresolved><span id=browser-sync-binding></span><template is=dom-bind id=app><e-menu selected></e-menu><iron-pages attr-for-selected=name selected><div name=home id=home><e-scaffold></e-scaffold></div><div name=sounakcan id=sounakcan><e-sounakcan></e-sounakcan></div><div name=work id=work><e-work></e-work></div><div name=login id=login><e-login></e-login></div></iron-pages><paper-toast id=toast><span class=toast-hide-button role=button tabindex=0 onclick=app.$.toast.hide()>Ok</span></paper-toast><paper-toast id=caching-complete duration=6000 text="Caching complete! This app will work offline."></paper-toast><platinum-sw-register auto-register clients-claim skip-waiting base-uri=bower_components/platinum-sw/bootstrap on-service-worker-installed=displayInstalledToast><platinum-sw-cache default-cache-strategy=fastest cache-config-file=cache-config.json></platinum-sw-cache></platinum-sw-register></template><script>var app = document.querySelector('#app');
+    document.addEventListener('WebComponentsReady', function() {
+        var template = document.querySelector('template[is="dom-bind"]');
+        template.route = 0; // selected is an index by default
+    });</script><script src=scripts/app.js></script>

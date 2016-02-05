@@ -1,8 +1,0 @@
-{
-  "preset": "google",
-  "disallowMultipleVarDecl":false,
-  "disallowSpacesInAnonymousFunctionExpression": null,
-  "disallowTrailingWhitespace": false,
-  "maximumLineLength": false,
-  "excludeFiles": ["node_modules/**"]
-}
