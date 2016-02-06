@@ -11394,31 +11394,31 @@ module.exports = Array.isArray || function (arr) {
     });*/
     /*Patch because for some reason the selected is not working*/
 
-    var selectedPage = document.querySelector('iron-pages').selected ;
+    var selectedPage = document.querySelector('iron-pages') ;
     page('/', function() {
       app.route = 'home';
-      selectedPage = 'home';
+      selectedPage.selected = 'home';
     });
 
     page(app.baseUrl, function() {
       app.route = 'home';
-      selectedPage = 'home';
+      selectedPage.selected = 'home';
     });
 
     page('/sounakcan', function() {
       app.route = 'sounakcan';
-      selectedPage = 'sounakcan';
+      selectedPage.selected = 'sounakcan';
     });
 
     page('/work', function() {
       app.route = 'work';
-      selectedPage = 'work';
+      selectedPage.selected = 'work';
       //app.params = data.params;
     });
 
     page('/login', function() {
       app.route = 'login';
-      selectedPage = 'login';
+      selectedPage.selected = 'login';
     });
 
     // 404
