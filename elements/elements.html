@@ -11392,26 +11392,33 @@ module.exports = Array.isArray || function (arr) {
     page('*', scrollToTop, closeDrawer, function(ctx, next) {
       next();
     });*/
+    /*Patch because for some reason the selected is not working*/
 
+    var selectedPage = document.querySelector('iron-pages').selected ;
     page('/', function() {
       app.route = 'home';
+      selectedPage = 'home';
     });
 
     page(app.baseUrl, function() {
       app.route = 'home';
+      selectedPage = 'home';
     });
 
     page('/sounakcan', function() {
       app.route = 'sounakcan';
+      selectedPage = 'sounakcan';
     });
 
     page('/work', function() {
       app.route = 'work';
+      selectedPage = 'work';
       //app.params = data.params;
     });
 
     page('/login', function() {
       app.route = 'login';
+      selectedPage = 'login';
     });
 
     // 404
