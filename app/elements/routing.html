@@ -36,26 +36,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     page('*', scrollToTop, closeDrawer, function(ctx, next) {
       next();
     });*/
+    /*Patch because for some reason the selected is not working*/
 
+    var selectedPage = document.querySelector('iron-pages') ;
     page('/', function() {
       app.route = 'home';
+      selectedPage.selected = 'home';
     });
 
-  /*  page(app.baseUrl, function() {
+    page(app.baseUrl, function() {
       app.route = 'home';
+      selectedPage.selected = 'home';
     });
-*/
+
     page('/sounakcan', function() {
       app.route = 'sounakcan';
+      selectedPage.selected = 'sounakcan';
     });
 
     page('/work', function() {
       app.route = 'work';
+      selectedPage.selected = 'work';
       //app.params = data.params;
     });
 
     page('/login', function() {
       app.route = 'login';
+      selectedPage.selected = 'login';
     });
 
     // 404
