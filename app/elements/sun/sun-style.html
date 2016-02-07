@@ -7,6 +7,9 @@
 
     :host{
       display: block;
+      background-image: url('../../images/sun/sky.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
     }
     .sky {
       height:100%;
@@ -20,9 +23,9 @@
       -moz-transform:translate3d(0,0,0);
       -o-transform:translate3d(0,0,0)
     }
-    /* 
+    /*
     .mountain {
-      background: url("mountain.png")  no-repeat;
+      background: url("../../images/sun/mountain.png")  no-repeat;
       -webkit-background-size: cover;
       background-size: cover;
       background-position: bottom center;
@@ -32,7 +35,7 @@
       width:100%;
     } */
     .sun {
-      background: url("sun.png") right 20% no-repeat;
+      background: url("../../images/sun/sun.png") right 20% no-repeat;
       position:absolute;
       -webkit-background-size: contain;
       background-size: contain;
@@ -46,9 +49,9 @@
       -moz-transform:translate3d(0,0,0);
       -o-transform:translate3d(0,0,0)
     }
-    
+
     .moon {
-      background: url("moon.png") right top no-repeat;
+      background: url("../../images/sun/moon.png") right top no-repeat;
       position:absolute;
       right:0;
       height:100%;
@@ -60,15 +63,15 @@
       -moz-transform:translate3d(0,0,0);
       -o-transform:translate3d(0,0,0)
     }
-    
-    
+
+
     .clouds_one {
-      background:url("cloud_one.png")  repeat-x;
+      background:url("../../images/sun/cloud_one.png")  repeat-x;
       position:absolute;
       left:0;
       top:0;
       height:100%;
-      width:300%;
+      width:2954px;
       -webkit-animation:cloud_one 50s linear infinite;
       -moz-animation:cloud_one 50s linear infinite;
       -o-animation:cloud_one 50s linear infinite;
@@ -76,14 +79,14 @@
       -moz-transform:translate3d(0,0,0);
       -o-transform:translate3d(0,0,0)
     }
-    
+
     .clouds_two {
-      background:url("cloud_two.png") repeat-x;
+      background:url("../../images/sun/cloud_two.png") repeat-x;
       position:absolute;
       left:0;
       top:0;
       height:100%;
-      width:300%;
+      width:2954px;
       -webkit-animation:cloud_two 75s linear infinite;
       -moz-animation:cloud_two 75s linear infinite;
       -o-animation:cloud_two 75s linear infinite;
@@ -91,13 +94,14 @@
       -moz-transform:translate3d(0,0,0);
       -o-transform:translate3d(0,0,0)
     }
-    
+
     .clouds_three {
-      background:url("cloud_three.png") repeat-x;
+      background:url("../../images/sun/cloud_three.png") repeat-x;
       position:absolute;
-      bottom:-200%;
+      left:0;
+      top:0;
       height:100%;
-      width:300%;
+      width:2954px;
       -webkit-animation:cloud_three 100s linear infinite;
       -moz-animation:cloud_three 100s linear infinite;
       -o-animation:cloud_three 100s linear infinite;
@@ -105,233 +109,229 @@
       -moz-transform:translate3d(0,0,0);
       -o-transform:translate3d(0,0,0)
     }
-    
+
     @-webkit-keyframes sky_background {
       0% {
         background:#007fd5;
-        color:#007fd5
       }
-      
+
       75% {
-        background:#000;
+        background:transparent;
         color:#a3d9ff
       }
-      
+
       100% {
         background:#007fd5;
-        color:#007fd5
       }
     }
-    
+
     @-webkit-keyframes sun {
       0% {
         opacity: 1;
-        bottom:0%;
+        transform:translateY(0%);
       }
-      
+
       10% {
         opacity: 1;
-        bottom:0%;
+        transform:translateY(0%);
       }
-      
+
       25% {
         opacity: 1;
-        bottom:0%;
+        transform:translateY(0%);
       }
 
       30% {
         opacity: 0;
-        bottom:200%;
+        transform:translateY(-200%);
       }
 
       75% {
         opacity: 0;
-        bottom:-100%;
+        transform:translateY(100%);
       }
 
       90% {
         opacity: 1;
-        bottom:0%;
+        transform:translateY(0%);
       }
-    
+
       100% {
         opacity: 1;
-        bottom: 0%;
+        transform:translateY( 0%);
       }
     }
-    
-    
+
+
     @-moz-keyframes sun {
       0% {
         opacity: 1;
-        bottom:0%;
+        transform:translateY(0%);
       }
-      
+
       10% {
         opacity: 1;
-        bottom:0%;
+        transform:translateY(0%);
       }
-      
+
       25% {
         opacity: 1;
-        bottom:0%;
+        transform:translateY(0%);
       }
 
       30% {
         opacity: 0;
-        bottom:200%;
+        transform:translateY(-200%);
       }
 
       75% {
         opacity: 0;
-        bottom:-100%;
+        transform:translateY(100%);
       }
 
       90% {
         opacity: 1;
-        bottom:0%;
+        transform:translateY(0%);
       }
-    
+
       100% {
         opacity: 1;
-        bottom: 0%;
+        transform:translateY( 0%);
       }
     }
-    
+
     @-webkit-keyframes moon {
       0% {
         opacity: 0;
-        bottom:-200%;
+        transform:translateY(-200%);
         -moz-transform: scale(0.5);
           -webkit-transform: scale(0.5);
       }
-      
+
       50% {
         opacity: 0.5;
         -moz-transform: scale(0.75);
-        bottom:0%;
+        transform:translateY(0%);
           -webkit-transform: scale(0.75);
       }
-    
+
       80% {
         opacity: 0.5;
         -moz-transform: scale(0.75);
-        bottom:0%;
+        transform:translateY(0%);
           -webkit-transform: scale(0.75);
       }
-    
+
       100% {
         opacity: 1;
-        bottom: 200%;
+        transform:translateY( 200%);
         -moz-transform: scale(1);
           -webkit-transform: scale(1);
       }
     }
-    
+
     @-webkit-keyframes cloud_one {
       0% {
-        left:0
+        transform:translateX(0)
       }
-    
+
       100% {
-        left:-200%
+        transform:translateX(-200%)
       }
     }
-    
+
     @-webkit-keyframes cloud_two {
       0% {
-        left:0
+        transform:translateX(0)
       }
-    
+
       100% {
-        left:-200%
+        transform:translateX(-200%)
       }
     }
-    
+
     @-webkit-keyframes cloud_three {
       0% {
-        left:0
+        transform:translateX(0)
       }
-    
+
       100% {
-        left:-200%
+        transform:translateX(-200%)
       }
     }
-    
+
     @-moz-keyframes sky_background {
       0% {
         background:#007fd5;
-        color:#007fd5
       }
-      
+
       75% {
-        background:#000;
+        background:transparent;
         color:#a3d9ff
       }
-      
+
       100% {
         background:#007fd5;
-        color:#007fd5
       }
     }
-    
+
     @-moz-keyframes moon {
       0% {
         opacity: 0;
-        bottom:-200%;
+        transform:translateY(-200%);
         -moz-transform: scale(0.5);
           -webkit-transform: scale(0.5);
       }
-      
+
       50% {
         opacity: 0.5;
         -moz-transform: scale(0.75);
-        bottom:0%;
+        transform:translateY(0%);
           -webkit-transform: scale(0.75);
       }
-    
+
       80% {
         opacity: 0.5;
         -moz-transform: scale(0.75);
-        bottom:0%;
+        transform:translateY(0%);
           -webkit-transform: scale(0.75);
       }
-    
+
       100% {
         opacity: 1;
-        bottom: 200%;
+        transform:translateY( 200%);
         -moz-transform: scale(1);
           -webkit-transform: scale(1);
       }
     }
-    
+
     @-moz-keyframes cloud_one {
       0% {
-        left:0
+        transform:translateX(0)
       }
-    
+
       100% {
-        left:-200%
+        transform:translateX(-200%)
       }
     }
-    
+
     @-moz-keyframes cloud_two {
       0% {
-        left:0
+        transform:translateX(0)
       }
-    
+
       100% {
-        left:-200%
+        transform:translateX(-200%)
       }
     }
-    
+
     @-moz-keyframes cloud_three {
       0% {
-        left:0
+        transform:translateX(0)
       }
-    
+
       100% {
-        left:-200%
+        transform:translateX(-200%)
       }
     }
     </style>

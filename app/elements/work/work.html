@@ -2,6 +2,7 @@
 <link rel="import" href="../../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/google-youtube/google-youtube.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-document.html">
 <link rel="import" href="work-item.html">
 <link rel="import" href="work-overlay.html">
 <link rel="import" href="../shared-styles/shared-styles.html">
@@ -12,18 +13,18 @@
         :host {
             height: 100%;
         }
-        
+
         .header {
             @apply(--header-text);
         }
-        
+
         .banner {
             background: var(--grey-alpha);
             overflow: auto;
             height: 100%;
             width: 100%;
         }
-        
+
         .content {
             @apply(--layout-horizontal);
             @apply(--layout-center-justified);
@@ -36,11 +37,11 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         #video {
             z-index: 0;
         }
-        
+
         .content,
         #bannerText,
         e-work-item ,
@@ -49,12 +50,12 @@
             -moz-box-sizing: border-box;
             box-sizing: border-box;
         }
-        
+
         #overlay {
             @apply(--layout-fit);
             z-index: 1;
         }
-        
+
         #bannerText {
             position: absolute;
             top: 50%;
@@ -66,7 +67,7 @@
             padding: 10%;
             color: var(--grey-alpha);
         }
-        
+
         .layoutHorizontal {
             max-width: 888px;
             margin: 0 auto;
@@ -81,7 +82,7 @@
             -o-flex-wrap: wrap;
             flex-wrap: wrap;
         }
-        
+
         .item {
             @apply(--layout-vertical);
             @apply(--normal-text);
@@ -90,7 +91,7 @@
             background: rgb(242,242,242);
             border-radius: 2px;
             border: 1px solid rgba(150,150,150,0.3);
-            /* 
+            /*
             -webkit-transition: transform 0.3s ease;
             -o-transition: transform 0.3s ease;
             transition: transform 0.3s ease;
@@ -101,26 +102,26 @@
             padding: 15px;
 
         }
-        
+
         .item .imgContainer {
             position: relative;
             width: 250px;
             height: 250px;
         }
-        
+
         .work-section {
             width: 200px;
             color: var(--grey-alpha);
             font-style: 12px;
         }
-        
+
         .heading {
             font-style: 14px;
             border-bottom: 1px solid var(--grey-alpha);
             font-family: 'Merriweather', serif;
             margin-bottom: 5px;
         }
-        
+
         p,
         a {
             margin: 5px 0;
@@ -138,7 +139,7 @@
                 </e-animate>
             </div>
             <div class="layoutHorizontal">
-                <template is="dom-repeat" items="[[data]]" as="item">
+                <template is="dom-repeat" items="[[work.data]]" as="item">
                     <div class="item" on-click="_fireAnimate">
                         <div class="imgContainer">
                             <e-work-item button-label="See Project" data="[[item]]" scroll-position="{{scrollPos}}"></e-work-item>
@@ -154,7 +155,9 @@
             <div></div>
         </div>
         <iron-media-query query="(min-width: 768px)" query-matches="{{queryMatches}}"></iron-media-query>
-        <iron-ajax auto url="data.json" handle-as="json" on-response="_onAjaxResponse"></iron-ajax>
+        <firebase-document
+      location="https://sounak.firebaseio.com/work"
+      data="{{work}}"></firebase-document>
     </template>
 </dom-module>
 <script>
@@ -204,7 +207,7 @@ Polymer({
         ele.animate();
         ele.data = ele.setData;
     },
-    
+
     _onAjaxResponse: function(event) {
         this.data = event.detail.response;
         /*var all = [];
