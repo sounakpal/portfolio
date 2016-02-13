@@ -11398,27 +11398,37 @@ module.exports = Array.isArray || function (arr) {
     page('/', function() {
       app.route = 'home';
       selectedPage.selected = 'home';
+      var element = document.createElement('e-scaffold');
+      document.querySelector('#home').appendChild(element);
     });
 
     page(app.baseUrl, function() {
       app.route = 'home';
       selectedPage.selected = 'home';
+      var element = document.createElement('e-scaffold');
+      document.querySelector('#home').appendChild(element);
     });
 
     page('/sounakcan', function() {
       app.route = 'sounakcan';
       selectedPage.selected = 'sounakcan';
+      var element = document.createElement('e-sounakcan');
+      document.querySelector('#sounakcan').appendChild(element);
     });
 
     page('/work', function() {
       app.route = 'work';
       selectedPage.selected = 'work';
+      var element = document.createElement('e-work');
+      document.querySelector('#work').appendChild(element);
       //app.params = data.params;
     });
 
     page('/login', function() {
       app.route = 'login';
       selectedPage.selected = 'login';
+      var element = document.createElement('e-login');
+      document.querySelector('#login').appendChild(element);
     });
 
     // 404
@@ -17364,22 +17374,23 @@ Polymer({
 
     :host{
       display: block;
+      background-image: url("../images/sun/sky.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
     }
     .sky {
       height:100%;
-      background:#007fd5;
-      position:relative;
+    width: 100%;
+    background: #007fd5;
+    position: absolute;
       overflow:hidden;
       -webkit-animation:sky_background 50s ease-out infinite;
       -moz-animation:sky_background 50s ease-out infinite;
       -o-animation:sky_background 50s ease-out infinite;
-      -webkit-transform:translate3d(0,0,0);
-      -moz-transform:translate3d(0,0,0);
-      -o-transform:translate3d(0,0,0)
     }
-    /* 
+    /*
     .mountain {
-      background: url("sun/mountain.png")  no-repeat;
+      background: url("../images/sun/mountain.png")  no-repeat;
       -webkit-background-size: cover;
       background-size: cover;
       background-position: bottom center;
@@ -17389,308 +17400,216 @@ Polymer({
       width:100%;
     } */
     .sun {
-      background: url("sun/sun.png") right 20% no-repeat;
       position:absolute;
-      -webkit-background-size: contain;
-      background-size: contain;
       right:0;
-      height:100%;
-      width:250px;
       -webkit-animation:sun 50s linear infinite;
       -moz-animation:sun 50s linear infinite;
       -o-animation:sun 50s linear infinite;
-      -webkit-transform:translate3d(0,0,0);
-      -moz-transform:translate3d(0,0,0);
-      -o-transform:translate3d(0,0,0)
     }
-    
+
     .moon {
-      background: url("sun/moon.png") right top no-repeat;
       position:absolute;
       right:0;
-      height:100%;
-      width:100%;
       -webkit-animation:moon 50s linear infinite;
       -moz-animation:moon 50s linear infinite;
       -o-animation:moon 50s linear infinite;
-      -webkit-transform:translate3d(0,0,0);
-      -moz-transform:translate3d(0,0,0);
-      -o-transform:translate3d(0,0,0)
     }
-    
-    
-    .clouds_one {
-      background:url("sun/cloud_one.png")  repeat-x;
+
+    .clouds{
+      position:relative;
+      @apply(--layout-horizontal);
+      @apply(--layout-center-justified);
+      @apply(--layout-center);
+      -webkit-animation:cloud_one 25s linear infinite;
+      -moz-animation:cloud_one 25s linear infinite;
+      -o-animation:cloud_one 25s linear infinite;
+    }
+    .clouds img{
       position:absolute;
       left:0;
-      top:0;
-      height:100%;
-      width:300%;
-      -webkit-animation:cloud_one 50s linear infinite;
-      -moz-animation:cloud_one 50s linear infinite;
-      -o-animation:cloud_one 50s linear infinite;
-      -webkit-transform:translate3d(0,0,0);
-      -moz-transform:translate3d(0,0,0);
-      -o-transform:translate3d(0,0,0)
     }
-    
-    .clouds_two {
-      background:url("sun/cloud_two.png") repeat-x;
-      position:absolute;
-      left:0;
-      top:0;
-      height:100%;
-      width:300%;
-      -webkit-animation:cloud_two 75s linear infinite;
-      -moz-animation:cloud_two 75s linear infinite;
-      -o-animation:cloud_two 75s linear infinite;
-      -webkit-transform:translate3d(0,0,0);
-      -moz-transform:translate3d(0,0,0);
-      -o-transform:translate3d(0,0,0)
-    }
-    
-    .clouds_three {
-      background:url("sun/cloud_three.png") repeat-x;
-      position:absolute;
-      bottom:-200%;
-      height:100%;
-      width:300%;
-      -webkit-animation:cloud_three 100s linear infinite;
-      -moz-animation:cloud_three 100s linear infinite;
-      -o-animation:cloud_three 100s linear infinite;
-      -webkit-transform:translate3d(0,0,0);
-      -moz-transform:translate3d(0,0,0);
-      -o-transform:translate3d(0,0,0)
-    }
-    
+   /*  .clouds_one {
+   }
+
+   .clouds_two {
+   }
+
+   .clouds_three {
+   } */
+
     @-webkit-keyframes sky_background {
       0% {
         background:#007fd5;
-        color:#007fd5
       }
-      
+
       75% {
-        background:#000;
+        background:transparent;
         color:#a3d9ff
       }
-      
+
       100% {
         background:#007fd5;
-        color:#007fd5
       }
     }
-    
+
     @-webkit-keyframes sun {
       0% {
         opacity: 1;
-        bottom:0%;
+        -webkit-transform:translateY(0%);
       }
-      
+
       10% {
         opacity: 1;
-        bottom:0%;
+        -webkit-transform:translateY(0%);
       }
-      
+
       25% {
         opacity: 1;
-        bottom:0%;
+        -webkit-transform:translateY(0%);
       }
 
       30% {
         opacity: 0;
-        bottom:200%;
+        -webkit-transform:translateY(-200%);
       }
 
       75% {
         opacity: 0;
-        bottom:-100%;
+        -webkit-transform:translateY(100%);
       }
 
       90% {
         opacity: 1;
-        bottom:0%;
+        -webkit-transform:translateY(0%);
       }
-    
+
       100% {
         opacity: 1;
-        bottom: 0%;
+        -webkit-transform:translateY(0%);
       }
     }
-    
-    
-    @-moz-keyframes sun {
-      0% {
-        opacity: 1;
-        bottom:0%;
-      }
-      
-      10% {
-        opacity: 1;
-        bottom:0%;
-      }
-      
-      25% {
-        opacity: 1;
-        bottom:0%;
-      }
 
-      30% {
-        opacity: 0;
-        bottom:200%;
-      }
-
-      75% {
-        opacity: 0;
-        bottom:-100%;
-      }
-
-      90% {
-        opacity: 1;
-        bottom:0%;
-      }
-    
-      100% {
-        opacity: 1;
-        bottom: 0%;
-      }
-    }
-    
     @-webkit-keyframes moon {
       0% {
         opacity: 0;
-        bottom:-200%;
-        -moz-transform: scale(0.5);
-          -webkit-transform: scale(0.5);
+          -webkit-transform: scale(0.5) translateY(200%);
       }
-      
+
       50% {
         opacity: 0.5;
-        -moz-transform: scale(0.75);
-        bottom:0%;
-          -webkit-transform: scale(0.75);
+          -webkit-transform: translateY(0%) scale(0.75);
       }
-    
+
       80% {
         opacity: 0.5;
-        -moz-transform: scale(0.75);
-        bottom:0%;
-          -webkit-transform: scale(0.75);
+          -webkit-transform: translateY(0%) scale(0.75);
       }
-    
+
       100% {
         opacity: 1;
-        bottom: 200%;
-        -moz-transform: scale(1);
-          -webkit-transform: scale(1);
+          -webkit-transform: translateY( -200%) scale(1);
       }
     }
-    
+
     @-webkit-keyframes cloud_one {
       0% {
-        left:0
+        -webkit-transform:translateX(33%);
       }
-    
+
       100% {
-        left:-200%
+        -webit-transform:translateX(-100%);
       }
     }
-    
-    @-webkit-keyframes cloud_two {
-      0% {
-        left:0
-      }
-    
-      100% {
-        left:-200%
-      }
-    }
-    
-    @-webkit-keyframes cloud_three {
-      0% {
-        left:0
-      }
-    
-      100% {
-        left:-200%
-      }
-    }
-    
+
+
+
     @-moz-keyframes sky_background {
       0% {
         background:#007fd5;
-        color:#007fd5
       }
-      
+
       75% {
-        background:#000;
+        background:transparent;
         color:#a3d9ff
       }
-      
+
       100% {
         background:#007fd5;
-        color:#007fd5
       }
     }
-    
+
+
+    @-moz-keyframes sun {
+      0% {
+        opacity: 1;
+        -moz-transform:translateY(0%);
+      }
+
+      10% {
+        opacity: 1;
+        -moz-transform:translateY(0%);
+      }
+
+      25% {
+        opacity: 1;
+        -moz-transform:translateY(0%);
+      }
+
+      30% {
+        opacity: 0;
+        -moz-transform:translateY(200%);
+      }
+
+      75% {
+        opacity: 0;
+        -moz-transform:translateY(100%);
+      }
+
+      90% {
+        opacity: 1;
+        -moz-transform:translateY(0%);
+      }
+
+      100% {
+        opacity: 1;
+        -moz-transform:translateY(0%);
+      }
+    }
+
+
     @-moz-keyframes moon {
       0% {
         opacity: 0;
-        bottom:-200%;
-        -moz-transform: scale(0.5);
-          -webkit-transform: scale(0.5);
+        -moz-transform: scale(0.5) translateY(200%);
       }
-      
+
       50% {
         opacity: 0.5;
-        -moz-transform: scale(0.75);
-        bottom:0%;
-          -webkit-transform: scale(0.75);
+        -moz-transform: translateY(0%) scale(0.75);
       }
-    
+
       80% {
         opacity: 0.5;
-        -moz-transform: scale(0.75);
-        bottom:0%;
-          -webkit-transform: scale(0.75);
+        -moz-transform: translateY(0%) scale(0.75);
       }
-    
+
       100% {
         opacity: 1;
-        bottom: 200%;
-        -moz-transform: scale(1);
-          -webkit-transform: scale(1);
+        -moz-transform: translateY( -200%) scale(1);
       }
     }
-    
+
     @-moz-keyframes cloud_one {
       0% {
-        left:0
+        -moz-transform:translateX(33%);
       }
-    
+
       100% {
-        left:-200%
+        -moz-transform:translateX(-100%);
       }
     }
-    
-    @-moz-keyframes cloud_two {
-      0% {
-        left:0
-      }
-    
-      100% {
-        left:-200%
-      }
-    }
-    
-    @-moz-keyframes cloud_three {
-      0% {
-        left:0
-      }
-    
-      100% {
-        left:-200%
-      }
-    }
+
+
     </style>
   </template>
 </dom-module>
@@ -17698,29 +17617,32 @@ Polymer({
 	Polymer({
     is: 'sun-styles'
 });
-</script><dom-module is="e-sun">
+</script>
+<dom-module is="e-sun">
 	<template>
 		<style is="custom-style" include="sun-styles"></style>
-		<div class="sky">
-	    	<div class="sun"></div>
-    	
-	    	<div class="moon"></div>
-	    
-	        <div class="clouds_one"></div>
+        <div class="sky"></div>
+	    	<img src="../images/sun/sun2.png" alt="sun" class="sun">
 
-	        <div class="clouds_two"></div>
+	    	<img src="../images/sun/moon.png" alt="moon" class="moon">
+        <div class="clouds">
+	        <img src="../images/sun/cloud_one.png" alt="cloud_one" class=" cloud_one">
 
-	        <div class="clouds_three"></div>
+	        <img src="../images/sun/cloud_two.png" alt="cloud_two" class=" cloud_two">
 
-		</div>
+	        <img src="../images/sun/cloud_three.png" alt="cloud_three" class=" cloud_three">
+
+        </div>
+
+
 	</template>
 </dom-module>
 <script>
 Polymer({
     is: 'e-sun'
 
-    
-  
+
+
 });
 </script>
 
@@ -17910,18 +17832,17 @@ Polymer({
             e-sun,
             #overlay {
                 @apply(--layout-fit);
-                z-index: -1;
             }
             #overlay {
                 background-color: rgba(255, 255, 255, 0.54);
-            }   
+            }
+            [banner]{
+              z-index: 1;
+            }
         </style>
-        <div banner="">
             <e-sun>
             </e-sun>
-            
-            <e-rain></e-rain>
-            <div id="overlay"></div>
+        <div banner="">
             <div banner__content="">
                 <e-animate active="{{animate}}" animate-class="rollIn">
                     <div banner__img="">
@@ -20237,6 +20158,87 @@ if (!window.Promise) {
     }
   });
 </script>
+
+
+<script>
+  Polymer({
+    is: 'firebase-document',
+
+    behaviors: [
+      Polymer.FirebaseQueryBehavior
+    ],
+
+    properties: {
+
+      /**
+       * Firebase Query object corresponding to `location`.
+       */
+      query: {
+        type: Object,
+        notify: true,
+        computed: '_computeQuery(location)',
+        observer: '_queryChanged'
+      },
+
+      /**
+       * The `data` object mapped to `location`.
+       */
+      data: {
+        type: Object,
+        notify: true
+      }
+    },
+
+    listeners: {
+      'firebase-value': '_onFirebaseValue'
+    },
+
+    _localDataChanged: function(change) {
+      var pathFragments = change.path.split('.');
+
+      if (pathFragments.length === 1) {
+        this._updateRemoteDocument();
+        return;
+      }
+
+      this._setRemoteDocumentChild(
+        pathFragments[1],
+        change.base[pathFragments[1]]
+      );
+    },
+
+    _onFirebaseValue: function(event) {
+      this._applyRemoteDataChange(function() {
+        this.set('data', event.detail.val());
+      });
+    },
+
+    _computeQuery: function(location) {
+      if (!location) {
+        return;
+      }
+
+      return new Firebase(location);
+    },
+
+    _updateRemoteDocument: function() {
+      this._log('Updating remote document');
+      this.query.update(this.dataAsObject);
+    },
+
+    _setRemoteDocumentChild: function(key, value) {
+      this.debounce('set-' + key, function() {
+        this._log('Setting child "' + key + '" to', value);
+        this.query.child(key).set(value);
+      });
+    },
+
+    _removeRemoteDocumentChild: function(key) {
+      this._log('Removing child "' + key + '"');
+      this.query.child(key).remove();
+    }
+  });
+</script>
 <dom-module is="e-work-item">
     <template>
         <style>
@@ -20586,18 +20588,18 @@ Polymer({
         :host {
             height: 100%;
         }
-        
+
         .header {
             @apply(--header-text);
         }
-        
+
         .banner {
             background: var(--grey-alpha);
             overflow: auto;
             height: 100%;
             width: 100%;
         }
-        
+
         .content {
             @apply(--layout-horizontal);
             @apply(--layout-center-justified);
@@ -20610,11 +20612,11 @@ Polymer({
             position: relative;
             overflow: hidden;
         }
-        
+
         #video {
             z-index: 0;
         }
-        
+
         .content,
         #bannerText,
         e-work-item ,
@@ -20623,12 +20625,12 @@ Polymer({
             -moz-box-sizing: border-box;
             box-sizing: border-box;
         }
-        
+
         #overlay {
             @apply(--layout-fit);
             z-index: 1;
         }
-        
+
         #bannerText {
             position: absolute;
             top: 50%;
@@ -20640,7 +20642,7 @@ Polymer({
             padding: 10%;
             color: var(--grey-alpha);
         }
-        
+
         .layoutHorizontal {
             max-width: 888px;
             margin: 0 auto;
@@ -20655,7 +20657,7 @@ Polymer({
             -o-flex-wrap: wrap;
             flex-wrap: wrap;
         }
-        
+
         .item {
             @apply(--layout-vertical);
             @apply(--normal-text);
@@ -20664,7 +20666,7 @@ Polymer({
             background: rgb(242,242,242);
             border-radius: 2px;
             border: 1px solid rgba(150,150,150,0.3);
-            /* 
+            /*
             -webkit-transition: transform 0.3s ease;
             -o-transition: transform 0.3s ease;
             transition: transform 0.3s ease;
@@ -20675,26 +20677,26 @@ Polymer({
             padding: 15px;
 
         }
-        
+
         .item .imgContainer {
             position: relative;
             width: 250px;
             height: 250px;
         }
-        
+
         .work-section {
             width: 200px;
             color: var(--grey-alpha);
             font-style: 12px;
         }
-        
+
         .heading {
             font-style: 14px;
             border-bottom: 1px solid var(--grey-alpha);
             font-family: 'Merriweather', serif;
             margin-bottom: 5px;
         }
-        
+
         p,
         a {
             margin: 5px 0;
@@ -20712,7 +20714,7 @@ Polymer({
                 </e-animate>
             </div>
             <div class="layoutHorizontal">
-                <template is="dom-repeat" items="[[data]]" as="item">
+                <template is="dom-repeat" items="[[work.data]]" as="item">
                     <div class="item" on-click="_fireAnimate">
                         <div class="imgContainer">
                             <e-work-item button-label="See Project" data="[[item]]" scroll-position="{{scrollPos}}"></e-work-item>
@@ -20728,7 +20730,7 @@ Polymer({
             <div></div>
         </div>
         <iron-media-query query="(min-width: 768px)" query-matches="{{queryMatches}}"></iron-media-query>
-        <iron-ajax auto="" url="data.json" handle-as="json" on-response="_onAjaxResponse"></iron-ajax>
+        <firebase-document location="https://sounak.firebaseio.com/work" data="{{work}}"></firebase-document>
     </template>
 </dom-module>
 <script>
@@ -20778,7 +20780,7 @@ Polymer({
         ele.animate();
         ele.data = ele.setData;
     },
-    
+
     _onAjaxResponse: function(event) {
         this.data = event.detail.response;
         /*var all = [];
