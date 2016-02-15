@@ -13,8 +13,9 @@
     }
     .sky {
       height:100%;
-      background:#007fd5;
-      position:relative;
+    width: 100%;
+    background: #007fd5;
+    position: absolute;
       overflow:hidden;
       -webkit-animation:sky_background 50s ease-out infinite;
       -moz-animation:sky_background 50s ease-out infinite;
@@ -32,50 +33,42 @@
       width:100%;
     } */
     .sun {
-      background: url("../../images/sun/sun.png") right 20% no-repeat;
       position:absolute;
-      -webkit-background-size: contain;
-      background-size: contain;
       right:0;
-      height:100%;
-      width:250px;
       -webkit-animation:sun 50s linear infinite;
       -moz-animation:sun 50s linear infinite;
       -o-animation:sun 50s linear infinite;
     }
 
     .moon {
-      background: url("../../images/sun/moon.png") right top no-repeat;
       position:absolute;
       right:0;
-      height:100%;
-      width:100%;
       -webkit-animation:moon 50s linear infinite;
       -moz-animation:moon 50s linear infinite;
       -o-animation:moon 50s linear infinite;
     }
 
     .clouds{
+      position:relative;
+      @apply(--layout-horizontal);
+      @apply(--layout-center-justified);
+      @apply(--layout-center);
+      -webkit-animation:cloud_one 25s linear infinite;
+      -moz-animation:cloud_one 25s linear infinite;
+      -o-animation:cloud_one 25s linear infinite;
+    }
+    .clouds img{
       position:absolute;
       left:0;
-      top:0;
-      height:100%;
-      width:2954px;
-      -webkit-animation:cloud_one 50s linear infinite;
-      -moz-animation:cloud_one 50s linear infinite;
-      -o-animation:cloud_one 50s linear infinite;
     }
-    .clouds_one {
-      background:url("../../images/sun/cloud_one.png")  repeat-x;
-    }
+   /*  .clouds_one {
+   }
 
-    .clouds_two {
-      background:url("../../images/sun/cloud_two.png") repeat-x;
-    }
+   .clouds_two {
+   }
 
-    .clouds_three {
-      background:url("../../images/sun/cloud_three.png") repeat-x;
-    }
+   .clouds_three {
+   } */
 
     @-webkit-keyframes sky_background {
       0% {
@@ -95,115 +88,69 @@
     @-webkit-keyframes sun {
       0% {
         opacity: 1;
-        transform:translateY(0%);
+        -webkit-transform:translateY(0%);
       }
 
       10% {
         opacity: 1;
-        transform:translateY(0%);
+        -webkit-transform:translateY(0%);
       }
 
       25% {
         opacity: 1;
-        transform:translateY(0%);
+        -webkit-transform:translateY(0%);
       }
 
       30% {
         opacity: 0;
-        transform:translateY(-200%);
+        -webkit-transform:translateY(-200%);
       }
 
       75% {
         opacity: 0;
-        transform:translateY(100%);
+        -webkit-transform:translateY(100%);
       }
 
       90% {
         opacity: 1;
-        transform:translateY(0%);
+        -webkit-transform:translateY(0%);
       }
 
       100% {
         opacity: 1;
-        transform:translateY( 0%);
-      }
-    }
-
-
-    @-moz-keyframes sun {
-      0% {
-        opacity: 1;
-        transform:translateY(0%);
-      }
-
-      10% {
-        opacity: 1;
-        transform:translateY(0%);
-      }
-
-      25% {
-        opacity: 1;
-        transform:translateY(0%);
-      }
-
-      30% {
-        opacity: 0;
-        transform:translateY(-200%);
-      }
-
-      75% {
-        opacity: 0;
-        transform:translateY(100%);
-      }
-
-      90% {
-        opacity: 1;
-        transform:translateY(0%);
-      }
-
-      100% {
-        opacity: 1;
-        transform:translateY( 0%);
+        -webkit-transform:translateY(0%);
       }
     }
 
     @-webkit-keyframes moon {
       0% {
         opacity: 0;
-        transform: scale(0.5) translateY(200%);
-        -moz-transform: scale(0.5) translateY(200%);
           -webkit-transform: scale(0.5) translateY(200%);
       }
 
       50% {
         opacity: 0.5;
-        -moz-transform: translateY(0%) scale(0.75);
-        transform: translateY(0%) scale(0.75);
           -webkit-transform: translateY(0%) scale(0.75);
       }
 
       80% {
         opacity: 0.5;
-        -moz-transform: translateY(0%) scale(0.75);
-        transform: translateY(0%) scale(0.75);
           -webkit-transform: translateY(0%) scale(0.75);
       }
 
       100% {
         opacity: 1;
-        transform: translateY( -200%) scale(1);
-        -moz-transform: translateY( -200%) scale(1);
           -webkit-transform: translateY( -200%) scale(1);
       }
     }
 
     @-webkit-keyframes cloud_one {
       0% {
-        transform:translateX(33%)
+        -webkit-transform:translateX(33%);
       }
 
       100% {
-        transform:translateX(-100%)
+        -webit-transform:translateX(-100%);
       }
     }
 
@@ -224,43 +171,74 @@
       }
     }
 
+
+    @-moz-keyframes sun {
+      0% {
+        opacity: 1;
+        -moz-transform:translateY(0%);
+      }
+
+      10% {
+        opacity: 1;
+        -moz-transform:translateY(0%);
+      }
+
+      25% {
+        opacity: 1;
+        -moz-transform:translateY(0%);
+      }
+
+      30% {
+        opacity: 0;
+        -moz-transform:translateY(200%);
+      }
+
+      75% {
+        opacity: 0;
+        -moz-transform:translateY(100%);
+      }
+
+      90% {
+        opacity: 1;
+        -moz-transform:translateY(0%);
+      }
+
+      100% {
+        opacity: 1;
+        -moz-transform:translateY(0%);
+      }
+    }
+
+
     @-moz-keyframes moon {
       0% {
         opacity: 0;
-        transform: scale(0.5) translateY(200%);
         -moz-transform: scale(0.5) translateY(200%);
-          -webkit-transform: scale(0.5) translateY(200%);
       }
 
       50% {
         opacity: 0.5;
         -moz-transform: translateY(0%) scale(0.75);
-        transform: translateY(0%) scale(0.75);
-          -webkit-transform: translateY(0%) scale(0.75);
       }
 
       80% {
         opacity: 0.5;
         -moz-transform: translateY(0%) scale(0.75);
-        transform: translateY(0%) scale(0.75);
-          -webkit-transform: translateY(0%) scale(0.75);
       }
 
       100% {
         opacity: 1;
-        transform: translateY( -200%) scale(1);
         -moz-transform: translateY( -200%) scale(1);
-          -webkit-transform: translateY( -200%) scale(1);
       }
     }
 
     @-moz-keyframes cloud_one {
       0% {
-        transform:translateX(33%)
+        -moz-transform:translateX(33%);
       }
 
       100% {
-        transform:translateX(-100%)
+        -moz-transform:translateX(-100%);
       }
     }
 

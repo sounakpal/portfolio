@@ -25,13 +25,13 @@
             width: 100%;
         }
 
-        .content {
+        .full-page_content {
             @apply(--layout-horizontal);
             @apply(--layout-center-justified);
             @apply(--layout-center);
             text-align: center;
             color: var(--grey-rgba);
-            min-height: 100%;
+            height: 100%;
             width: 100%;
             background: #000;
             position: relative;
@@ -42,7 +42,7 @@
             z-index: 0;
         }
 
-        .content,
+        .full-page_content,
         #bannerText,
         e-work-item ,
         .item {
@@ -129,12 +129,12 @@
         }
         </style>
         <div class="banner" id="banner">
-            <div class="content" id="contentArea">
+            <div class="full-page_content" id="contentArea">
                 <div id="overlay"></div>
                 <template is="dom-if" if="[[queryMatches]]">
                     <google-youtube id="video" state="{{videoState}}" chromeless video-id="8s168V2lJMI" fluid autoplay="1"></google-youtube>
                 </template>
-                <e-animate id="bannerText" active="[[!active]]" animate-class="bounceInUp">
+                <e-animate id="bannerText" active animate-class="bounceInUp">
                     <div class="header">Quality user experience through responsive web development and performant front-end development.</div>
                 </e-animate>
             </div>
@@ -229,8 +229,8 @@ Polymer({
     _onIronResize: function() {
         //var height = window.innerHeight;
         //var width = window.innerWidth;
-        this.widthOffset = window.innerWidth;
-        console.log(window.innerWidth);
+        //this.widthOffset = window.innerWidth;
+        //console.log(window.innerWidth);
 
 /*
         if(width <height){

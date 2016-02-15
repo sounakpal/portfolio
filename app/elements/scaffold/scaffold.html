@@ -10,29 +10,82 @@
             e-sun,
             #overlay {
                 @apply(--layout-fit);
-                z-index: -1;
             }
             #overlay {
                 background-color: rgba(255, 255, 255, 0.54);
             }
+            [banner]{
+              z-index: 1;
+            }
+
+        [banner__img] {
+            @apply(--border-circle);
+
+            background: url("../../images/4.png") no-repeat cadetblue;
+            width: 180px;
+            height: 180px;
+            border: 1rem solid var(--grey-bbb);
+            background-size: cover;
+            margin: 0 auto;
+        }
+
+        .banner__name h1 {
+            @apply(--shadow-text);
+            font-size: 3rem;
+            font-family: 'RANCHO';
+        }
+            .content{
+              -webkit-animation: text_animate 50s ease-out infinite;
+              -moz-animation: text_animate 50s ease-out infinite;
+              -o-animation: text_animate 50s ease-out infinite;
+            }
+
+    @-webkit-keyframes text_animate {
+      0% {
+        color:#bbb;
+      }
+
+      75% {
+        color:#fff;
+      }
+
+      100% {
+        color:#bbb;
+      }
+    }
+
+    @-moz-keyframes text_animate {
+      0% {
+        color:#bbb;
+      }
+
+      75% {
+        color:#fff;
+      }
+
+      100% {
+        color:#bbb;
+      }
+    }
         </style>
-        <div banner>
             <e-sun>
             </e-sun>
-            <div id="overlay"></div>
-            <div banner__content>
+        <div banner>
+            <div class="full-page_content" banner__content>
                 <e-animate active="{{animate}}" animate-class="rollIn">
                     <div banner__img>
                     </div>
                 </e-animate>
-				<h5>Hi, I am</h5>
-                <e-animate delay="1s" banner__name active="{{animate}}" animate-class="bounceInUp">
-                    <h1>Sounak Pal.</h1>
-                </e-animate>
-                <e-animate banner__designation active="{{animate}}" delay="2s" animate-class="tada">
-                    <h4>Front-end developer</h4>
-                </e-animate>
-                <h5>by Proffesion. Based in India</h5>
+                <div class="content">
+                  <h5>Hi, I am</h5>
+                  <e-animate delay="1000" class="banner__name" active="{{animate}}" animate-class="bounceInUp">
+                      <h1>Sounak Pal.</h1>
+                  </e-animate>
+                  <e-animate class="banner__designation" active="{{animate}}" delay="2000" animate-class="tada">
+                      <h4>Front-end developer</h4>
+                  </e-animate>
+                  <h5>by Proffesion. Based in India</h5>
+                </div>
             </div>
         </div>
     </template>

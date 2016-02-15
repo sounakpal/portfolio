@@ -42,27 +42,53 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     page('/', function() {
       app.route = 'home';
       selectedPage.selected = 'home';
+      if(document.querySelector('e-scaffold')){
+        return;
+      }
+      var element = document.createElement('e-scaffold');
+      element.animate =true;
+      document.querySelector('#home').appendChild(element);
     });
 
     page(app.baseUrl, function() {
       app.route = 'home';
       selectedPage.selected = 'home';
+      if(document.querySelector('e-scaffold')){
+        return;
+      }
+      var element = document.createElement('e-scaffold');
+      document.querySelector('#home').appendChild(element);
     });
 
     page('/sounakcan', function() {
       app.route = 'sounakcan';
       selectedPage.selected = 'sounakcan';
+      if(document.querySelector('e-sounakcan')){
+        return;
+      }
+      var element = document.createElement('e-sounakcan');
+      document.querySelector('#sounakcan').appendChild(element);
     });
 
     page('/work', function() {
       app.route = 'work';
       selectedPage.selected = 'work';
+      if(document.querySelector('e-work')){
+        return;
+      }
+      var element = document.createElement('e-work');
+      document.querySelector('#work').appendChild(element);
       //app.params = data.params;
     });
 
     page('/login', function() {
       app.route = 'login';
       selectedPage.selected = 'login';
+      if(document.querySelector('e-login')){
+        return;
+      }
+      var element = document.createElement('e-login');
+      document.querySelector('#login').appendChild(element);
     });
 
     // 404

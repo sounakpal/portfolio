@@ -1,57 +1,78 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-
-
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
-
 <dom-module is="e-animate">
-  <link rel="import" href="animate.css" type="css">
-  <template>
-    <div class="wow" id="target" data-wow-duration$="{{duration}}" data-wow-delay$="{{delay}}" data-wow-offset$="{{offset}}" data-wow-iteration$="{{iteration}}">
-      <content select="*"></content>
-    </div>
-  </template>
+    <link rel="import" href="animate.css" type="css">
+    <template>
+      <style>
+        #target{
+          visibility: hidden;
+        }
+      </style>
+        <div class="wow" id="target"> <!-- data-wow-duration$="{{duration}}" data-wow-delay$="{{delay}}" data-wow-offset$="{{offset}}" data-wow-iteration$="{{iteration}}" -->
+            <content select="*"></content>
+        </div>
+    </template>
 </dom-module>
 <script>
-  Polymer({
+Polymer({
     is: 'e-animate',
 
     properties: {
+/*
+        duration: String,*/
 
-        duration: String,
-
-        delay: String,
-
+        delay: {
+          type:Number,
+          value:0
+        },
+/*
         offset: Number,
 
-        iteration: Number,
+        iteration: Number,*/
 
         animateClass: {
-        type: String,
-        observer: '_animateClass'
+            type: String,
+            observer: '_animateClass'
         },
         active: {
-        type: Boolean,
-        value: false,
-        reflectToAttribute: true
-          /*,
-                    observer:'startAnimation'*/
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true
+                /*,
+                          observer:'startAnimation'*/
+        }
+    },
+    observers: [
+      '_animateClass(animateClass,active)'
+    ],
+/*
+    observers:
+      []
+    ,
+
+    attached: function() {
+        if(this.active){
+          new WOW().init();
         }
     },
 
-    attached: function() {
-      /*if(this.active){
-        new WOW().init();
-      }*/
-    },
-
     ready: function() {
-        this.$.target.classList.add(this.animateClass);
     },
-
-    _animateClass: function() {
-        if (this.active) {
-            this.$.target.classList.add(this.animateClass);
-        /* new WOW().init();*/
+*/
+    _animateClass: function(animateClass,active) {
+        var comp = this;
+        if (active) {
+          setTimeout(function(){
+            comp.$.target.classList.add(comp.animateClass);
+            comp.$.target.classList.add('animated');
+            comp.$.target.style.visibility='visible';
+          },comp.delay);
+            /* new WOW().init();*/
+        }else {
+          comp.$.target.classList.remove(comp.animateClass);
+          comp.$.target.classList.remove('animated');
+            comp.$.target.style.visibility='hidden';
+            /* new WOW().init();*/
         }
     },
     /*created: function() {
@@ -74,6 +95,5 @@
     //startAnimation:function(){
     //  this.attached();
     //}
-  });
-
+});
 </script>
