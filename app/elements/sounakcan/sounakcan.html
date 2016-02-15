@@ -9,7 +9,7 @@
         :host {
             height: 100%;
         }
-        
+
         .banner {
             background: var(--grey-alpha);
             overflow: auto;
@@ -19,33 +19,16 @@
         .header {
             @apply(--header-text);
         }
-        
-        .content {
-            @apply(--layout-horizontal);
-            @apply(--layout-center-justified);
-            @apply(--layout-center);
-            text-align: center;
-            color: var(--grey-rgba);
-            height: 100%;
-            max-height: 100%;
-            width: 100%;
-            background: #000;
-            position: relative;
-            overflow: hidden;
-        }
+
+
         .bottom{
             @apply(--message-text);
             @apply(--layout-vertical);
             background: var(--grey-alpha);
             color: var(--grey-rgba);
         }
-        .content,
-        #bannerText {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-        
+
+
         #bannerText {
             position: absolute;
             top: 50%;
@@ -66,9 +49,9 @@
             margin: 5% 0;
         }
         .content--sub{
-            font-size: 20px;    
+            font-size: 20px;
         }
-       
+
         .layout {
             margin-top: 5%;
         }
@@ -85,7 +68,7 @@
             @apply(--layout-fit);
             z-index: 1;
         }
-        
+
             #contentArea{
                 background-image: url('../../images/sounakcan/bg-320.jpg');
                 background-size: cover;
@@ -104,7 +87,7 @@
         }
         </style>
         <div class="banner" id="banner" >
-            <div class="content" id="contentArea">
+            <div class="full-page_content" id="contentArea">
                 <div id="overlay"></div>
                 <e-animate id="bannerText" active animate-class="bounceInUp">
                     <div class="header">
@@ -112,14 +95,14 @@
                     </div>
                 </e-animate>
             </div>
-            <div class="content bottom">
-            
+            <div class="full-page_content bottom">
+
                 <div class="img__row--html"></div>
                 <div class="content--sub">
                     I also use some tools to smoothen the workflow like
                 </e-animate>
                 <div class="layout" id="imgContainer">
-                    
+
                 </div>
             </div>
         </div>

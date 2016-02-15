@@ -14,11 +14,17 @@
             #overlay {
                 background-color: rgba(255, 255, 255, 0.54);
             }
-            [banner]{
+            /* [banner]{
               z-index: 1;
             }
+             */
+        .banner__content {
+            @apply(--header-text);
 
-        [banner__img] {
+            max-width: 90%;
+            /* font-style: italic; */
+        }
+        .banner__img {
             @apply(--border-circle);
 
             background: url("../../images/4.png") no-repeat cadetblue;
@@ -67,13 +73,25 @@
         color:#bbb;
       }
     }
+
+        @media (min-width: 600px) {
+            .banner__content {
+                max-width: 400px;
+            }
+            .banner__img {
+                width: 250px;
+                height: 250px;
+            }
+            .banner__name {
+            }
+        }
         </style>
             <e-sun>
             </e-sun>
-        <div banner>
-            <div class="full-page_content" banner__content>
+        <div banner  class="full-page_content">
+            <div class="banner__content">
                 <e-animate active="{{animate}}" animate-class="rollIn">
-                    <div banner__img>
+                    <div class="banner__img">
                     </div>
                 </e-animate>
                 <div class="content">
