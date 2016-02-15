@@ -17246,9 +17246,9 @@ Polymer({
             position: relative;
             transition: all 0.3s ease;
         }
-        #hamburger:hover{
-            transform:rotate(90deg);
-        }
+       /*  #hamburger:hover{
+           transform:rotate(90deg);
+       } */
 
         #hamburger span,
         #hamburger span:before,
@@ -17326,7 +17326,7 @@ Polymer({
         }
         </style>
         <style include="shared-styles"></style>
-        <a id="hamburger" on-click="_activeMenu">
+        <a id="hamburger" on-tap="_activeMenu">
             <span></span>
         </a>
         <div class="menu__overlay" hidden$="{{!active}}">
@@ -17867,7 +17867,7 @@ Polymer({
         [banner__img] {
             @apply(--border-circle);
 
-            background: url("scaffold/4.png") no-repeat cadetblue;
+            background: url("../images/4.png") no-repeat cadetblue;
             width: 180px;
             height: 180px;
             border: 1rem solid var(--grey-bbb);
