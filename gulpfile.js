@@ -24,6 +24,7 @@ var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var ensureFiles = require('./tasks/ensure-files.js');
+//var polybuild = require('polybuild');
 
 // var ghPages = require('gulp-gh-pages');
 
@@ -83,18 +84,6 @@ var optimizeHtmlTask = function(src, dest) {
     .pipe($.if('*.css', $.cssnano()))
     .pipe(assets.restore())
     .pipe($.useref())
-    // Minify any HTML
-    .pipe($.if('*.html', $.htmlmin({
-      removeComments: true,
-      collapseWhitespace: true,
-      collapseBooleanAttributes: true,
-      removeAttributeQuotes: true,
-      removeRedundantAttributes: true,
-      removeEmptyAttributes: true,
-      removeScriptTypeAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-      removeOptionalTags: true
-    })))
     // Output files
     .pipe(gulp.dest(dest))
     .pipe($.size({
@@ -198,6 +187,7 @@ gulp.task('vulcanize', function() {
       inlineCss: true,
       inlineScripts: true
     }))
+    //.pipe(polybuild({maximumCrush: true, suffix: ''}))
     .pipe(gulp.dest(dist('elements')))
     .pipe($.size({title: 'vulcanize'}));
 });
