@@ -11398,6 +11398,9 @@ module.exports = Array.isArray || function (arr) {
     page('/', function() {
       app.route = 'home';
       selectedPage.selected = 'home';
+      if(document.querySelector('e-scaffold')){
+        return;
+      }
       var element = document.createElement('e-scaffold');
       element.animate =true;
       document.querySelector('#home').appendChild(element);
@@ -11406,6 +11409,9 @@ module.exports = Array.isArray || function (arr) {
     page(app.baseUrl, function() {
       app.route = 'home';
       selectedPage.selected = 'home';
+      if(document.querySelector('e-scaffold')){
+        return;
+      }
       var element = document.createElement('e-scaffold');
       document.querySelector('#home').appendChild(element);
     });
@@ -11413,6 +11419,9 @@ module.exports = Array.isArray || function (arr) {
     page('/sounakcan', function() {
       app.route = 'sounakcan';
       selectedPage.selected = 'sounakcan';
+      if(document.querySelector('e-sounakcan')){
+        return;
+      }
       var element = document.createElement('e-sounakcan');
       document.querySelector('#sounakcan').appendChild(element);
     });
@@ -11420,6 +11429,9 @@ module.exports = Array.isArray || function (arr) {
     page('/work', function() {
       app.route = 'work';
       selectedPage.selected = 'work';
+      if(document.querySelector('e-work')){
+        return;
+      }
       var element = document.createElement('e-work');
       document.querySelector('#work').appendChild(element);
       //app.params = data.params;
@@ -11428,6 +11440,9 @@ module.exports = Array.isArray || function (arr) {
     page('/login', function() {
       app.route = 'login';
       selectedPage.selected = 'login';
+      if(document.querySelector('e-login')){
+        return;
+      }
       var element = document.createElement('e-login');
       document.querySelector('#login').appendChild(element);
     });
@@ -15548,25 +15563,36 @@ X.prototype.Ze=function(a,b){D("Firebase.resetPassword",1,2,arguments.length);sg
             @apply(--layout-horizontal);
         }
 
+        .full-page_content,
+        #bannerText,
+        e-work-item ,
+        .item {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
 
-
-        [banner] {
+        .full-page_content {
+            @apply(--layout-horizontal);
+            @apply(--layout-center-justified);
+            @apply(--layout-center);
+            text-align: center;
+            color: var(--grey-rgba);
+            height: 100%;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+        }/*
+        .full-page_content {
             @apply(--layout-vertical);
             @apply(--layout-center-justified);
             @apply(--layout-center);
             width: 100%;
-        }
+        } */
 
-        [banner__content] {
-            @apply(--header-text);
 
-            max-width: 90%;
-            /* font-style: italic; */
-            color:var(--grey-rgba);
-            text-align: center;
-        }
-
-        [banner__content] h5,
+        .banner__content h5,
         .banner__name h1,
         .banner__name::content >div,
         .banner__designation::content >div,
@@ -15582,18 +15608,6 @@ X.prototype.Ze=function(a,b){D("Firebase.resetPassword",1,2,arguments.length);sg
             font-family: "Lobster", cursive;
             margin: 0.2rem auto;
         } */
-
-        @media (min-width: 600px) {
-            [banner__content] {
-                max-width: 400px;
-            }
-            [banner__img] {
-                width: 250px;
-                height: 250px;
-            }
-            .banner__name {
-            }
-        }
         </style>
     </template>
 </dom-module>
@@ -17860,11 +17874,17 @@ Polymer({
             #overlay {
                 background-color: rgba(255, 255, 255, 0.54);
             }
-            [banner]{
+            /* [banner]{
               z-index: 1;
             }
+             */
+        .banner__content {
+            @apply(--header-text);
 
-        [banner__img] {
+            max-width: 90%;
+            /* font-style: italic; */
+        }
+        .banner__img {
             @apply(--border-circle);
 
             background: url("../images/4.png") no-repeat cadetblue;
@@ -17913,13 +17933,25 @@ Polymer({
         color:#bbb;
       }
     }
+
+        @media (min-width: 600px) {
+            .banner__content {
+                max-width: 400px;
+            }
+            .banner__img {
+                width: 250px;
+                height: 250px;
+            }
+            .banner__name {
+            }
+        }
         </style>
             <e-sun>
             </e-sun>
-        <div banner="">
-            <div banner__content="">
+        <div banner="" class="full-page_content">
+            <div class="banner__content">
                 <e-animate active="{{animate}}" animate-class="rollIn">
-                    <div banner__img="">
+                    <div class="banner__img">
                     </div>
                 </e-animate>
                 <div class="content">
@@ -17994,7 +18026,7 @@ Polymer({
         :host {
             height: 100%;
         }
-        
+
         .banner {
             background: var(--grey-alpha);
             overflow: auto;
@@ -18004,33 +18036,16 @@ Polymer({
         .header {
             @apply(--header-text);
         }
-        
-        .content {
-            @apply(--layout-horizontal);
-            @apply(--layout-center-justified);
-            @apply(--layout-center);
-            text-align: center;
-            color: var(--grey-rgba);
-            height: 100%;
-            max-height: 100%;
-            width: 100%;
-            background: #000;
-            position: relative;
-            overflow: hidden;
-        }
+
+
         .bottom{
             @apply(--message-text);
             @apply(--layout-vertical);
             background: var(--grey-alpha);
             color: var(--grey-rgba);
         }
-        .content,
-        #bannerText {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-        
+
+
         #bannerText {
             position: absolute;
             top: 50%;
@@ -18051,9 +18066,9 @@ Polymer({
             margin: 5% 0;
         }
         .content--sub{
-            font-size: 20px;    
+            font-size: 20px;
         }
-       
+
         .layout {
             margin-top: 5%;
         }
@@ -18070,7 +18085,7 @@ Polymer({
             @apply(--layout-fit);
             z-index: 1;
         }
-        
+
             #contentArea{
                 background-image: url("../images/sounakcan/bg-320.jpg");
                 background-size: cover;
@@ -18089,7 +18104,7 @@ Polymer({
         }
         </style>
         <div class="banner" id="banner">
-            <div class="content" id="contentArea">
+            <div class="full-page_content" id="contentArea">
                 <div id="overlay"></div>
                 <e-animate id="bannerText" active="" animate-class="bounceInUp">
                     <div class="header">
@@ -18097,14 +18112,14 @@ Polymer({
                     </div>
                 </e-animate>
             </div>
-            <div class="content bottom">
-            
+            <div class="full-page_content bottom">
+
                 <div class="img__row--html"></div>
                 <div class="content--sub">
                     I also use some tools to smoothen the workflow like
                 
                 <div class="layout" id="imgContainer">
-                    
+
                 </div>
             </div>
         </div>
@@ -20676,30 +20691,12 @@ Polymer({
             width: 100%;
         }
 
-        .content {
-            @apply(--layout-horizontal);
-            @apply(--layout-center-justified);
-            @apply(--layout-center);
-            text-align: center;
-            color: var(--grey-rgba);
-            min-height: 100%;
-            width: 100%;
-            background: #000;
-            position: relative;
-            overflow: hidden;
-        }
-
         #video {
             z-index: 0;
         }
 
-        .content,
-        #bannerText,
-        e-work-item ,
-        .item {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
+        .full-page_content{
+            background: #000;
         }
 
         #overlay {
@@ -20780,7 +20777,7 @@ Polymer({
         }
         </style>
         <div class="banner" id="banner">
-            <div class="content" id="contentArea">
+            <div class="full-page_content" id="contentArea">
                 <div id="overlay"></div>
                 <template is="dom-if" if="[[queryMatches]]">
                     <google-youtube id="video" state="{{videoState}}" chromeless="" video-id="8s168V2lJMI" fluid="" autoplay="1"></google-youtube>
