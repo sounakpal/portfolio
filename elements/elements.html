@@ -11399,6 +11399,7 @@ module.exports = Array.isArray || function (arr) {
       app.route = 'home';
       selectedPage.selected = 'home';
       var element = document.createElement('e-scaffold');
+      element.animate =true;
       document.querySelector('#home').appendChild(element);
     });
 
@@ -11446,8 +11447,8 @@ module.exports = Array.isArray || function (arr) {
   });
 </script>
 <dom-module is="e-animate">
-  
-  <template><style>
+    
+    <template><style>
 @charset "UTF-8";
 /*!
 Animate.css - http://daneden.me/animate
@@ -14615,52 +14616,76 @@ Copyright (c) 2014 Daniel Eden
 }
 
 </style>
-    <div class="wow" id="target" data-wow-duration$="{{duration}}" data-wow-delay$="{{delay}}" data-wow-offset$="{{offset}}" data-wow-iteration$="{{iteration}}">
-      <content select="*"></content>
-    </div>
-  </template>
+      <style>
+        #target{
+          visibility: hidden;
+        }
+      </style>
+        <div class="wow" id="target"> 
+            <content select="*"></content>
+        </div>
+    </template>
 </dom-module>
 <script>
-  Polymer({
+Polymer({
     is: 'e-animate',
 
     properties: {
+/*
+        duration: String,*/
 
-        duration: String,
-
-        delay: String,
-
+        delay: {
+          type:Number,
+          value:0
+        },
+/*
         offset: Number,
 
-        iteration: Number,
+        iteration: Number,*/
 
         animateClass: {
-        type: String,
-        observer: '_animateClass'
+            type: String,
+            observer: '_animateClass'
         },
         active: {
-        type: Boolean,
-        value: false,
-        reflectToAttribute: true
-          /*,
-                    observer:'startAnimation'*/
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true
+                /*,
+                          observer:'startAnimation'*/
+        }
+    },
+    observers: [
+      '_animateClass(animateClass,active)'
+    ],
+/*
+    observers:
+      []
+    ,
+
+    attached: function() {
+        if(this.active){
+          new WOW().init();
         }
     },
 
-    attached: function() {
-      /*if(this.active){
-        new WOW().init();
-      }*/
-    },
-
     ready: function() {
-        this.$.target.classList.add(this.animateClass);
     },
-
-    _animateClass: function() {
-        if (this.active) {
-            this.$.target.classList.add(this.animateClass);
-        /* new WOW().init();*/
+*/
+    _animateClass: function(animateClass,active) {
+        var comp = this;
+        if (active) {
+          setTimeout(function(){
+            comp.$.target.classList.add(comp.animateClass);
+            comp.$.target.classList.add('animated');
+            comp.$.target.style.visibility='visible';
+          },comp.delay);
+            /* new WOW().init();*/
+        }else {
+          comp.$.target.classList.remove(comp.animateClass);
+          comp.$.target.classList.remove('animated');
+            comp.$.target.style.visibility='hidden';
+            /* new WOW().init();*/
         }
     },
     /*created: function() {
@@ -14683,8 +14708,7 @@ Copyright (c) 2014 Daniel Eden
     //startAnimation:function(){
     //  this.attached();
     //}
-  });
-
+});
 </script>
 <dom-module is="e-button">
     <template>
@@ -15484,8 +15508,8 @@ X.prototype.Ze=function(a,b){D("Firebase.resetPassword",1,2,arguments.length);sg
 <style is="custom-style">
     :root {
             --shadow-text: {
-                text-shadow: .04em .04em 0 #fff, .08em .08em 0 #aaa;
-                -webkit-text-shadow: .04em .04em 0 #fff, .08em .08em 0 #aaa;
+                text-shadow: .04em .04em 0 #696969, .08em .08em 0 #797979;
+                -webkit-text-shadow: .04em .04em 0 #696969, .08em .08em 0 #797979;
             }
             --border-circle: {
                 border-radius: 50%;
@@ -15494,7 +15518,7 @@ X.prototype.Ze=function(a,b){D("Firebase.resetPassword",1,2,arguments.length);sg
             }
             --header-text: {
                 font-family: 'Merriweather', sans-serif;
-                font-style: italic;
+                /* font-style: italic; */
                 font-weight: 300;
                 font-size: 2rem;
             }
@@ -15503,11 +15527,12 @@ X.prototype.Ze=function(a,b){D("Firebase.resetPassword",1,2,arguments.length);sg
                 font-style: normal;
             }
             --grey-rgba: rgba(119, 119, 119, 0.75);
+            --grey-white: #ffffff;
             --grey-bbb: #bbbbbb;
-            --grey-alpha: #eee;
+            --grey-alpha: #eeeeee;
            --message-text:{
                 font-family: 'Merriweather', sans-serif;
-                font-style: italic;
+                /* font-style: italic; */
               font-size: 1rem;
               font-weight: 100;
             }
@@ -15517,64 +15542,47 @@ X.prototype.Ze=function(a,b){D("Firebase.resetPassword",1,2,arguments.length);sg
 <dom-module id="shared-styles" assetpath="shared-styles/">
     <template>
         <style>
-        
-        
+
+
         :host {
             @apply(--layout-horizontal);
         }
-        
-        
-        
+
+
+
         [banner] {
             @apply(--layout-vertical);
             @apply(--layout-center-justified);
             @apply(--layout-center);
             width: 100%;
         }
-        
+
         [banner__content] {
             @apply(--header-text);
-            
+
             max-width: 90%;
-            font-style: italic;
+            /* font-style: italic; */
             color:var(--grey-rgba);
             text-align: center;
         }
-        
-        [banner__content] h5,
-        [banner__name] h1,
-        [banner__name]::content >div,
-        [banner__designation]::content >div,
-        [banner__designation] h4 {
-            line-height: 1;
-            display: inline;
-        }
-        
-        [banner__img] {
-            @apply(--border-circle);
 
-            background: url("scaffold/4.png") no-repeat cadetblue;
-            width: 180px;
-            height: 180px;
-            border: 1rem solid var(--grey-bbb);
-            background-size: cover;
-            margin: 0 auto;
+        [banner__content] h5,
+        .banner__name h1,
+        .banner__name::content >div,
+        .banner__designation::content >div,
+        .banner__designation h4 {
+            line-height: 1;
+            display: inline-block;
+            margin: 0;
         }
-        
-        [banner__name] h1 {
-            @apply(--shadow-text);
-            font-size: 3rem;
-            color: var(--grey-alpha);
-            font-family: 'RANCHO';
-        }
-        
-        [banner__designation] h4 {/* 
+/*
+        .banner__designation h4 {
             font-size: 2rem;
             font-weight: 400;
             font-family: "Lobster", cursive;
-            margin: 0.2rem auto; */
-        }
-        
+            margin: 0.2rem auto;
+        } */
+
         @media (min-width: 600px) {
             [banner__content] {
                 max-width: 400px;
@@ -15583,7 +15591,7 @@ X.prototype.Ze=function(a,b){D("Firebase.resetPassword",1,2,arguments.length);sg
                 width: 250px;
                 height: 250px;
             }
-            [banner__name] {
+            .banner__name {
             }
         }
         </style>
@@ -17286,7 +17294,7 @@ Polymer({
         }
 
         .menu__overlay {
-            background: rgba(0, 0, 0, 0.7);
+            background: var(--grey-alpha);
             display: none;
             position: fixed;
             z-index: 98;
@@ -17309,11 +17317,11 @@ Polymer({
             display: block;
         }
         iron-selector a:hover,
-        iron-selector .iron-selected{
+        .iron-selected a{
             transform:scale(1.1);
             color: var(--grey-bbb);
         }
-        iron-selector a:last-child{
+        iron-selector e-animate:last-child a {
             border-bottom: 0;
         }
         </style>
@@ -17324,11 +17332,26 @@ Polymer({
         <div class="menu__overlay" hidden$="{{!active}}">
             <div class="menu__content">
                 <iron-selector attr-for-selected="name" on-iron-activate="_activeMenu" id="selector" selected="{{selected}}">
+
+                <e-animate delay="100" active="[[active]]" name="home" animate-class="fadeInLeft">
                     <a href="{{baseUrl}}" name="home">home</a>
+                    </e-animate>
+
+                <e-animate delay="200" active="[[active]]" name="sounakcan" animate-class="fadeInLeft">
                     <a href="{{baseUrl}}sounakcan" name="sounakcan">what I can do</a>
+                    </e-animate>
+
+                <e-animate delay="300" active="[[active]]" name="work" animate-class="fadeInLeft">
                     <a href="{{baseUrl}}work" name="work">what I have done</a>
+                    </e-animate>
+
+                <e-animate delay="400" active="[[active]]" name="login" animate-class="fadeInLeft">
                     <a href="{{baseUrl}}login" name="login">login</a>
+                    </e-animate>
+
+                <e-animate delay="500" active="[[active]]" name="connect" animate-class="fadeInLeft">
                     <a href="{{baseUrl}}connect" name="connect">stay connected</a>
+                    </e-animate>
                 </iron-selector>
             </div>
         </div>
@@ -17343,6 +17366,7 @@ Polymer({
         active: {
             type: Boolean,
             reflectToAttribute: true,
+            notify:true,
             value: false
         },
 
@@ -17839,6 +17863,56 @@ Polymer({
             [banner]{
               z-index: 1;
             }
+
+        [banner__img] {
+            @apply(--border-circle);
+
+            background: url("scaffold/4.png") no-repeat cadetblue;
+            width: 180px;
+            height: 180px;
+            border: 1rem solid var(--grey-bbb);
+            background-size: cover;
+            margin: 0 auto;
+        }
+
+        .banner__name h1 {
+            @apply(--shadow-text);
+            font-size: 3rem;
+            font-family: 'RANCHO';
+        }
+            .content{
+              -webkit-animation: text_animate 50s ease-out infinite;
+              -moz-animation: text_animate 50s ease-out infinite;
+              -o-animation: text_animate 50s ease-out infinite;
+            }
+
+    @-webkit-keyframes text_animate {
+      0% {
+        color:#bbb;
+      }
+
+      75% {
+        color:#fff;
+      }
+
+      100% {
+        color:#bbb;
+      }
+    }
+
+    @-moz-keyframes text_animate {
+      0% {
+        color:#bbb;
+      }
+
+      75% {
+        color:#fff;
+      }
+
+      100% {
+        color:#bbb;
+      }
+    }
         </style>
             <e-sun>
             </e-sun>
@@ -17848,14 +17922,16 @@ Polymer({
                     <div banner__img="">
                     </div>
                 </e-animate>
-				<h5>Hi, I am</h5>
-                <e-animate delay="1s" banner__name="" active="{{animate}}" animate-class="bounceInUp">
-                    <h1>Sounak Pal.</h1>
-                </e-animate>
-                <e-animate banner__designation="" active="{{animate}}" delay="2s" animate-class="tada">
-                    <h4>Front-end developer</h4>
-                </e-animate>
-                <h5>by Proffesion. Based in India</h5>
+                <div class="content">
+                  <h5>Hi, I am</h5>
+                  <e-animate delay="1000" class="banner__name" active="{{animate}}" animate-class="bounceInUp">
+                      <h1>Sounak Pal.</h1>
+                  </e-animate>
+                  <e-animate class="banner__designation" active="{{animate}}" delay="2000" animate-class="tada">
+                      <h4>Front-end developer</h4>
+                  </e-animate>
+                  <h5>by Proffesion. Based in India</h5>
+                </div>
             </div>
         </div>
     </template>
@@ -20382,19 +20458,19 @@ Polymer({
             height: 100%;
             width: 100%;
         }
-        
+
         .heading {
             @apply(--normal-text);
             margin: 10px 0;
             font-size: 1rem;
         }
-        
+
         .content {
             padding: 0 20px;
             @apply(--message-text);
             text-align: center;
         }
-        
+
         #body {
             opacity: 0;
             position: fixed;
@@ -20412,7 +20488,7 @@ Polymer({
             background-size: cover;
             background-repeat: no-repeat;
         }
-        
+
         .close {
             position: absolute;
             top: 0.4em;
@@ -20423,7 +20499,7 @@ Polymer({
             cursor: pointer;
             z-index: 1000;
         }
-        
+
         .close:before {
             content: 'x';
             font-weight: 100;
@@ -20437,7 +20513,7 @@ Polymer({
             text-align: center;
             text-indent: 0px;
         }
-        
+
         @media(min-width: 768px) {
             #body {
                 @apply(--layout-horizontal);
@@ -20462,7 +20538,7 @@ Polymer({
         <div id="body">
             <span class="close" on-click="closeClip"></span>
             
-            <e-animate class="content" active="{{active}}" delay="1s" animate-class="fadeInUp">
+            <e-animate class="content" id="animate" delay="1000" animate-class="fadeInUp">
                 <div>
                     <div class="item-text">
                         <h2 class="heading">Project</h2>
@@ -20523,7 +20599,7 @@ Polymer({
 
         },
         _getUrl: function() {
-            if (this.active) {
+            if (this.$.animate.active) {
                 this.animate();
             }
             if (!this.data) {
@@ -20554,12 +20630,12 @@ Polymer({
             this.$.body.style.opacity = 1;
             this.$.body.style.zIndex = 9999;
             this.$.body.style.pointerEvents = 'auto';
+            this.$.animate.active = true;
             var comp = this;
             setTimeout(function() {
                 comp.$.body.style.clip = comp.clipOpen;
             }, 1000);
 
-            this.active = true;
 
         },
 
@@ -20568,6 +20644,7 @@ Polymer({
             this._setClip();
 
             this.$.body.style.clip = this.clipClosed;
+            this.$.animate.active = false;
             var comp = this;
             setTimeout(function() {
                 comp.$.body.style.opacity = 0;
@@ -20575,7 +20652,6 @@ Polymer({
                 comp.$.body.style.pointerEvents = 'none';
             }, 1000);
 
-            this.active = false;
             e.stopPropagation();
         }
 
@@ -20709,7 +20785,7 @@ Polymer({
                 <template is="dom-if" if="[[queryMatches]]">
                     <google-youtube id="video" state="{{videoState}}" chromeless="" video-id="8s168V2lJMI" fluid="" autoplay="1"></google-youtube>
                 </template>
-                <e-animate id="bannerText" active="[[!active]]" animate-class="bounceInUp">
+                <e-animate id="bannerText" active="" animate-class="bounceInUp">
                     <div class="header">Quality user experience through responsive web development and performant front-end development.</div>
                 </e-animate>
             </div>
@@ -20802,8 +20878,8 @@ Polymer({
     _onIronResize: function() {
         //var height = window.innerHeight;
         //var width = window.innerWidth;
-        this.widthOffset = window.innerWidth;
-        console.log(window.innerWidth);
+        //this.widthOffset = window.innerWidth;
+        //console.log(window.innerWidth);
 
 /*
         if(width <height){
