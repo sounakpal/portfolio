@@ -74,7 +74,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
     .app > *{
         @apply(--layout-flex);
-        
+
     }
     .loginMenu{
         @apply(--layout-vertical);
@@ -126,7 +126,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   white-space: nowrap;
   overflow: hidden;
   width: 100%;
-  animation: type 4s steps(60, end); 
+  animation: type 4s steps(60, end);
 }
 .typo:nth-child(2){
   animation: type2 8s steps(60, end);
@@ -140,15 +140,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   animation: blink 1s infinite;
 }
 
-@keyframes type{ 
-  from { width: 0; } 
-} 
+@keyframes type{
+  from { width: 0; }
+}
 
 @keyframes type2{
   0%{width: 0;}
   50%{width: 0;}
-  100%{ width: 100; } 
-} 
+  100%{ width: 100; }
+}
 
 @keyframes blink{
   to{opacity: .0;}
@@ -162,8 +162,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     background-size: contain;
   background:  url(1.png) no-repeat center center;
   animation-name: bgImage;
-  animation-duration: 1s; 
-  animation-timing-function: step-end; 
+  animation-duration: 1s;
+  animation-timing-function: step-end;
   animation-delay: 0;
   animation-direction: alternate;
   animation-iteration-count: 8;
@@ -174,8 +174,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   25%{background: #ecf0f1 url(3.png) no-repeat center center}
   50%{background: #ecf0f1 url(2.png) no-repeat center center}
   75%{background: #ecf0f1 url(1.png) no-repeat center center}
-  100%{ background: #ecf0f1 url(3.png) no-repeat center center} 
-} 
+  100%{ background: #ecf0f1 url(3.png) no-repeat center center}
+}
 
 ::selection{
   background: black;
@@ -186,7 +186,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- Firebase location:
     <input value="https://sounak.firebaseio.com/" size="40" disabled>
     <br>
-    
+
     Provider type:
     <select value="{{provider::change}}">
       <option>facebook</option>
@@ -197,18 +197,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </select>
     <em>Only 'anonymous', 'google', and 'password' are activated for demo Firebase account</em>
     <br>
-    
+
     <em>Required by some provider types</em>
     <div id="message">[[message]]</div>
     <br>
-    
+
     <h3>Login status:</h3>
     <p>{{computeLoginStatus(statusKnown, user)}}</p>
     <h3>User ID:</h3>
      <button on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}">Login</button>
     <button on-tap="logout" class$="{{provider}}" hidden$="{{computeLogoutHidden(statusKnown, user)}}">Logout</button>
     <pre>{{user.uid}}</pre> -->
-    
+
     <template is="dom-if" if="{{computeLogoutHidden(statusKnown, user)}}">
       <div class="fit">
         <div class="social-wrap c">
@@ -218,17 +218,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
       </div>
     </template>
-   
+
     <template is="dom-if" if="{{computeLoginHidden(statusKnown, user)}}">
       <div class="app">
         <div class="loginMenu">
-          
+
           <div><span>Contact</span></div>
           <div class="photo">
             <div class="text"><em>
               <div class="typo">hi folks, thanks for coming this far.</div>
-              <div class="typo">Post a comment on the right 
-              :)<span>|</span></div></em> 
+              <div class="typo">Post a comment on the right
+              :)<span>|</span></div></em>
             </div>
           </div>
           <div class="links">
@@ -242,7 +242,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
       </div>
     </template>
-    
+
   </template>
 </dom-module>
 <script>

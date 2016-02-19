@@ -25,6 +25,7 @@ var packageJson = require('./package.json');
 var crypto = require('crypto');
 var ensureFiles = require('./tasks/ensure-files.js');
 //var polybuild = require('polybuild');
+var htmlmin = require('gulp-htmlmin');
 
 // var ghPages = require('gulp-gh-pages');
 
@@ -79,6 +80,7 @@ var optimizeHtmlTask = function(src, dest) {
     .pipe($.if('*.js', $.uglify({
       preserveComments: 'some'
     })))
+    .pipe(htmlmin({collapseWhitespace: true}))
     // Concatenate and minify styles
     // In case you are still using useref build blocks
     .pipe($.if('*.css', $.cssnano()))
