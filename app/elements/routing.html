@@ -81,6 +81,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       //app.params = data.params;
     });
 
+    page('/resume', function() {
+      app.route = 'resume';
+      selectedPage.selected = 'resume';
+      if(document.querySelector('e-resume')){
+        return;
+      }
+      var element = document.createElement('e-resume');
+      document.querySelector('#resume').appendChild(element);
+    });
+
     page('/login', function() {
       app.route = 'login';
       selectedPage.selected = 'login';
