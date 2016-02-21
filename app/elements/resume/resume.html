@@ -1,0 +1,329 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-document.html">
+<link rel="import" href="../shared-styles/shared-styles.html">
+<dom-module is="e-resume">
+    <template>
+        <style include="shared-styles">
+        :host,
+        #body {
+            display: block;
+            height: 100%;
+            width: 100%;
+            overflow: auto;
+            color: var(--grey-bbb);
+        }
+.sprite { display: inline-block; background: url('../../images/resume/sprite.png') no-repeat top left; width: 44px; height: 44px; margin: auto;
+    background-color: var(--grey-alpha);
+    border: 1px solid var(--grey-bbb);
+    border-radius: 50%; }
+.sprite.clients { background-position: 0 0; }
+.sprite.education { background-position: -54px 0; }
+.sprite.experience { background-position: -108px 0; }
+.sprite.skills { background-position: -162px 0; }
+.sprite.hobbies { background-position: -216px 0; }
+.sprite.html { background-position: -270px 0; }
+.sprite.css { background-position: -324px 0; }
+.sprite.js { background-position: -378px 0; }
+.sprite.google { background-position: -432px 0; }
+.sprite.github { background-position: -486px 0; }
+.sprite.facebook { background-position: -540px 0; }
+.sprite.linkedIn { background-position: -594px 0; }
+.sprite.twitter { background-position: -648px 0; }
+.sprite.mail { background-position: -702px 0; }
+.sprite.phone { background-position: -756px 0; }
+.sprite.skype { background-position: -810px 0; width: 44px; }
+
+        .divider {
+            width: 70px;
+            height: 1px;
+            background: var(--grey-bbb);
+            margin: 10px auto;
+        }
+
+        .header {
+            padding: 10px;
+            color: var(--grey-alpha);
+        }
+        .body > .header{
+            background: var(--grey-rgba);
+        }
+        .item {
+            @apply(--layout-flex);
+            @apply(--layout-self-start);
+            @apply(--layout-verical);
+            text-align: center;
+        }
+
+        .section-row {
+            margin-top: 20px;
+            @apply(--layout-justified);
+        }
+
+        .wrapper {
+            max-width: 768px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-box {
+            min-width: 30%;
+            @apply(--layout-self-start);
+            border: 1px solid var(--grey-bbb);
+            background: var(--grey-alpha);
+            margin-top: 20px;
+            padding: 10px;
+        }
+
+        .section-row .section-box {
+            @apply(--layout-self-stretch);
+        }
+        .experience-section{
+          margin-top: 40px;
+        }
+        .section-box-header {
+            margin-top: -25px;
+            text-align: center;
+        }
+
+        h1,
+        h2,
+        h3,
+        h5 {
+            margin: 5px 0;
+            @apply(--message-text);
+        }
+        .section-box h3,
+        .section-box h5 {
+            color: var(--grey-rgba);
+        }
+        h4,
+        p ,
+        a{
+            margin: 5px 0;
+            @apply(--normal-text);
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .body h1,
+        .body h3 {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .clients-body{
+          background: url('../../images/resume/clients.png') no-repeat center;
+            background-size: contain;
+            min-height: 300px;
+
+        }
+        .clients-body-hobby{
+            background-image: url('../../images/resume/hobbies.png');
+
+        }
+        .self-image {
+            @apply(--border-circle);
+            background: url("../../images/4.png") no-repeat cadetblue;
+            width: 120px;
+            height: 120px;
+            background-size: cover;
+            margin: 0 auto;
+        }
+
+@media (min-width: 768px){
+        .header,
+        .section-box-body,
+        .section-row,.header .wrapper {
+            @apply(--layout-horizontal);
+            @apply(--layout-center);
+        }
+        .header .wrapper {
+          width: 100%;
+        }
+        .divider {
+            height: 70px;
+            width: 1px;
+            margin: 10px;
+        }
+
+
+}
+        </style>
+        <div class="body" id="body">
+            <div class="header">
+              <div class="wrapper">
+                <div class="item">
+                    <div class="self-image"></div>
+                    <h1>Sounak Pal</h1>
+                    <h2>Senior front end developer</h2>
+                </div>
+                <div class="divider"></div>
+                <div class="item">
+                    <h3>Contact</h3>
+                    <div class="sprite mail"></div>
+                    <a href="mailto:talk2sounak@gmail.com">talk2sounak@gmail.com</a>
+                    <div class="sprite phone"></div>
+                    <a href="tel:+91(0)8600544489">+91(0)8600544489</a>
+                </div>
+                <div class="divider"></div>
+                <div class="item">
+                    <h3>Social</h3>
+                    <div class="header">
+                        <a target="_blank" href="" href="https://www.facebook.com/palsounak" class="sprite facebook"></a>
+                        <a target="_blank" href="https://github.com/sounakpal/" class="sprite github"></a>
+                        <a target="_blank" href="https://in.linkedin.com/in/sounakpal" class="sprite linkedIn"></a>
+                    </div>
+                    <div class="header">
+                        <a target="_blank" href="https://plus.google.com/u/0/+SounakPalUI/posts" class="sprite google"></a>
+                        <a target="_blank" href="https://twitter.com/sounakpal" class="sprite twitter"></a>
+                        <a target="_blank" href="skype:sounak.pal?call" class="sprite skype"></a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="wrapper">
+                <div class="section-box">
+                    <div class="section-box-header">
+                        <div class="sprite skills"></div>
+                        <h3>Skills</h3>
+                    </div>
+                    <div class="section-box-body">
+                        <div class="item">
+                            <figure class="sprite html"></figure>
+                            <h3>HTML</h3>
+                            <p>HTML5 APIs, Shadow dom, Web Components, Graceful  degradation, organic SEO.</p>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="item">
+                            <figure class="sprite css"></figure>
+                            <h3>CSS</h3>
+                            <p> Sass/SCSS, LESS, RWD, CSS3 animations, Web animations, Flexbox model</p>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="item">
+                            <figure class="sprite js"></figure>
+                            <h3>JavaScript</h3>
+                            <p>Native JavaScript, jQuery, Polymer.js, REST, Gulp, Grunt, APIs, speed &  size optimization.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-box experience-section">
+                    <div class="section-box-header">
+                        <div class="sprite experience"></div>
+                        <h3>Experience</h3>
+                    </div>
+                    <div class="section-box-body">
+                        <div class="item">
+                            <p>2009-2012</p>
+                            <h5>UI developer</h5>
+                            <h4>Pathbreakerz Consulting</h4>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="item">
+                            <p>2012-2013</p>
+                            <h5>UI/UX Developer</h5>
+                            <h4>Trad Online</h4>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="item">
+                            <p>2013-2014</p>
+                            <h5>UI developer</h5>
+                            <h4>Synechron Technologies</h4>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="item">
+                            <p>2014-2015</p>
+                            <h5>Solution Architect</h5>
+                            <h4>HARMAN</h4>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="item">
+                            <p>2015-Present</p>
+                            <h5>Sr. Software developer</h5>
+                            <h4>Tavisca</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-row">
+                    <div class="section-box">
+                        <div class="section-box-header">
+                            <div class="sprite education"></div>
+                            <h3>Education</h3>
+                        </div>
+                        <div class="section-box-body">
+                            <div class="item">
+                                <h5>Development, Design, UX and Marketing</h5>
+                                <p class="details">Seminars, blogs, books, articles…
+                                <br /> Since Jan 10</p>
+                                <h5>Bachelors in Science (Major in Computer Application)</h5>
+                                <p class="details">
+                                    Calcutta University, Kolkata, India<br />  Aug 05 – Jun 08
+                                </p>
+
+                                <h5>International English Language Testing System</h5>
+                                <p>British Council, Kolkata, India<br />  May 10</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="section-box">
+                        <div class="section-box-header">
+                            <div class="sprite clients"></div>
+                            <h3>Clients</h3>
+                        </div>
+                        <div class="section-box-body">
+                            <div class="item clients-body">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="section-box">
+                        <div class="section-box-header">
+                            <div class="sprite hobbies"></div>
+                            <h3>Hobbies</h3>
+                        </div>
+                        <div class="section-box-body">
+                            <div class="item clients-body clients-body-hobby">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <iron-media-query query="(min-width: 768px)" query-matches="{{queryMatches}}"></iron-media-query>
+        <firebase-document location="https://sounak.firebaseio.com/resume" data="{{resume}}"></firebase-document>
+    </template>
+</dom-module>
+<script>
+Polymer({
+    is: 'e-resume',
+    properties: {
+
+        active: {
+            type: Boolean,
+            value: false,
+            notify: true
+        },
+        scrollContainer: {
+            type: String,
+            value: 'banner'
+        },
+        data: {
+            type: Object,
+            value: function() {
+                return null;
+            }
+        },
+        videoState: {
+            type: Number,
+            observer: '_playAgain'
+        }
+
+
+    }
+});
+</script>
