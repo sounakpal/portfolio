@@ -17355,7 +17355,7 @@ Polymer({
         </a>
         <div class="menu__overlay" hidden$="{{!active}}">
             <div class="menu__content">
-                <iron-selector attr-for-selected="name" on-iron-activate="_activeMenu" id="selector" selected="{{selected}}">
+                <iron-selector attr-for-selected="name" on-iron-select="_activeMenu" id="selector" selected="{{selected}}">
 
                 <e-animate delay="100" active="[[active]]" name="home" animate-class="fadeInLeft">
                     <a href="{{baseUrl}}" name="home">home</a>
