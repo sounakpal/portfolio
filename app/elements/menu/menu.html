@@ -108,7 +108,7 @@
             <div class="menu__content">
                 <iron-selector
                  attr-for-selected="name"
-                on-iron-activate="_activeMenu"
+                on-iron-select="_activeMenu"
                 id="selector"
                 selected="{{selected}}">
 
@@ -124,14 +124,14 @@
                     <a href="{{baseUrl}}work" name="work">what I have done</a>
                     </e-animate>
 
-                <e-animate delay="400" active="[[active]]" name="login" animate-class="fadeInLeft">
-                    <a href="{{baseUrl}}login" name="login">login</a>
+                <e-animate delay="400" active="[[active]]" name="resume" animate-class="fadeInLeft">
+                    <a href="{{baseUrl}}resume" name="resume">my resume</a>
                     </e-animate>
-
-                <e-animate delay="500" active="[[active]]" name="connect" animate-class="fadeInLeft">
-                    <a href="{{baseUrl}}connect" name="connect">stay connected</a>
-                    </e-animate>
+                <e-animate delay="500" active="[[active]]" name="login" animate-class="fadeInLeft">
+                    <a href="{{baseUrl}}login" name="login">hire me</a>
+                </e-animate>
                 </iron-selector>
+
             </div>
         </div>
     </template>
