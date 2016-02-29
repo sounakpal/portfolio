@@ -68,8 +68,8 @@
         }
 
         .section-box {
-            min-width: 30%;
             @apply(--layout-self-start);
+            @apply(--layout-flex);
             border: 1px solid var(--grey-bbb);
             background: var(--grey-alpha);
             margin-top: 20px;
@@ -133,6 +133,10 @@
             background-size: cover;
             margin: 0 auto;
         }
+        .section-row .divider{
+          visibility: hidden;
+        }
+
 
 @media (min-width: 768px){
         .header,
@@ -149,8 +153,6 @@
             width: 1px;
             margin: 10px;
         }
-
-
 }
         </style>
         <div class="body" id="body">
