@@ -11,7 +11,7 @@
             border: none;
             border-bottom: solid 2px #c9c9c9;
             box-shadow: inset 0px 1px 23px -7px #707070;
-            
+
             outline: 0;
             height: 100%;
             max-height: 100%;
@@ -24,7 +24,7 @@
             resize: none;
           @apply(--message-text);
         }
-        
+
         textarea:focus,
         textarea.focus {
             border-bottom: solid 2px #969696;
@@ -58,13 +58,13 @@ textarea.error::-webkit-input-placeholder {
    color: red;
 }
 textarea.error:-moz-placeholder { /* Firefox 18- */
-   color: red;  
+   color: red;
 }
 textarea.error::-moz-placeholder {  /* Firefox 19+ */
-   color: red;  
+   color: red;
 }
-textarea.error:-ms-input-placeholder {  
-   color: red;  
+textarea.error:-ms-input-placeholder {
+   color: red;
 }
         </style>
         <firebase-collection id="chat" location="https://sounak.firebaseio.com/chat" data="{{chats}}"></firebase-collection>
@@ -72,7 +72,7 @@ textarea.error:-ms-input-placeholder {
         <div class="layout">
             <div class="chat-area">
                 <template is="dom-repeat" items="{{chats}}" as="chat">
-                    <e-chat-item other-style chat-item="[[chat]]" user="[[user]]" on-like="like" on-child-added="runScroll" on-remove-like="removeLike" on-remove-item="fireRemoved"></e-chat-item>
+                    <e-chat-item chat-item="[[chat]]" user="[[user]]" on-like="like" on-child-added="runScroll" on-remove-like="removeLike" on-remove-item="fireRemoved"></e-chat-item>
                 </template>
             </div>
             <div class="chatbox-area">
