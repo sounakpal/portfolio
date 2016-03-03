@@ -85,16 +85,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       height: 100%;
       }
       .social-wrap{ max-width: 600px; text-align: center; color: var(--grey-bbb); }
-
+    .smiley{
+    transform: rotate(90deg);
+    display: inline-block;
+    margin-left: 5px;
+    }
 
     </style>
-    <firebase-auth id="firebaseLogin" params='{{params}}' user="{{user}}" status-known="{{statusKnown}}" location="https://sounak.firebaseio.com/" provider="{{provider}}" on-error="errorHandler" on-login="userSuccessHandler"></firebase-auth>
+    <firebase-auth id="firebaseLogin" params="[[params]]" user="{{user}}" status-known="{{statusKnown}}" location="https://sounak.firebaseio.com/" provider="{{provider}}" on-error="errorHandler" on-login="userSuccessHandler"></firebase-auth>
 
 
     <template is="dom-if" if="{{computeLogoutHidden(statusKnown, user)}}">
       <div class="fit">
         <div class="social-wrap c">
-          <h1>Hi, please login to let me know you were here. No spams :)</h1>
+          <h1>Hi, please login to let me know you were here. No spams <span class="smiley">:)</span></h1>
           <button on-click="login" class="facebook" value="facebook">Sign in with Facebook</button>
           <button on-click="login" class="twitter" value="twitter">Sign in with Twitter</button>
           <button on-click="login" class="googleplus" value="google">Sign in with Google</button>
@@ -166,19 +170,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     login: function(e) {
-      var params;
-
-      try {
-        params = JSON.parse(this.params);
-      } catch (e) {
-        params = null;
-      }
-      console.log(e.srcElement.value);
       this.provider = e.srcElement.value;
-
+      this._setProviderScopes(this.provider);
       this.$.firebaseLogin.login();
     },
+    _setProviderScopes: function(provider){
+      switch(provider) {
+          case 'facebook':
+              alert('fb');
+              this.params = {"rememberMe": true,"scope": "email,user_likes"};
+              break;
+          case 'google':
+              alert('google');
+              this.params = {"rememberMe": true,"scope": "email"};
+              break;
+          default:
+              this.params = null;
+      }
 
+    },
+    _saveDataAtFirebase: function(){
+
+    },
     logout: function() {
       this.$.firebaseLogin.logout();
     },
@@ -188,6 +201,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     userSuccessHandler: function(e) {
+      this.provider = e.detail.user.provider;
       console.log(e);
       if(!this.user){
         return;
@@ -195,11 +209,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       var usersRef = ref.child('users');
       var uid = e.detail.user.uid;
       usersRef.child(uid).update({
-          'full_name': e.detail.user.facebook.displayName,
-          'email': e.detail.user.facebook.email,
-          'photo':e.detail.user.facebook.profileImageURL
+          'full_name': e.detail.user[this.provider].displayName,
+          'email': e.detail.user[this.provider].email,
+          'photo':e.detail.user[this.provider].profileImageURL
         });
-      this.message = e.type + ' success!';
     },
 
     computeLoginHidden: function(statusKnown, user) {
