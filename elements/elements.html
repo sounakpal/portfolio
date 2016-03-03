@@ -17292,7 +17292,7 @@ Polymer({
                 <iron-selector attr-for-selected="name" on-iron-select="_activeMenu" id="selector" selected="{{selected}}">
 
                 <e-animate delay="100" active="[[active]]" name="home" animate-class="fadeInLeft">
-                    <a href="/" name="home">home</a>
+                    <a href="menu/%7B%7BbaseUrl%7D" name="home">home</a>
                     </e-animate>
 
                 <e-animate delay="200" active="[[active]]" name="sounakcan" animate-class="fadeInLeft">
@@ -21014,11 +21014,11 @@ iframe {
                     <div>[[data.skills]]</div>
                 </div>
             </e-animate>
-            <div class="content">
+            <e-animate class="content" id="animate2" delay="1000" animate-class="fadeInDown">
                 <device-view id="device" src$="[[data.url]]" device="phone"></device-view>
-            <div>
+            </e-animate>
         </div>
-    </div></div></template>
+    </template>
     <script>
     Polymer({
         is: 'e-work-overlay',
@@ -21051,21 +21051,22 @@ iframe {
         ready: function() {
 
         },
-        _getUrl: function() {/*
-            if (this.$.animate.active) {
-                this.animate();
-            }
-            if (!this.data) {
-                return;
-            }
-            if (this.widthOffset < 768) {
-                console.log('url(components/work/img/' + this.data.name + '-phone.png)');
-                this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-320.jpg)';
-            } else if (this.widthOffset >= 768 && this.widthOffset < 1024) {
-                this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-768.jpg)';
-            } else {
-                this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-1024.jpg)';
-            }*/
+        _getUrl: function() {
+            /*
+                        if (this.$.animate.active) {
+                            this.animate();
+                        }
+                        if (!this.data) {
+                            return;
+                        }
+                        if (this.widthOffset < 768) {
+                            console.log('url(components/work/img/' + this.data.name + '-phone.png)');
+                            this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-320.jpg)';
+                        } else if (this.widthOffset >= 768 && this.widthOffset < 1024) {
+                            this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-768.jpg)';
+                        } else {
+                            this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-1024.jpg)';
+                        }*/
         },
 
         _setClip: function() {
@@ -21083,7 +21084,11 @@ iframe {
             this.$.body.style.opacity = 1;
             this.$.body.style.zIndex = 9999;
             this.$.body.style.pointerEvents = 'auto';
+            //setting animete to true
+
             this.$.animate.active = true;
+            this.$.animate2.active = true;
+
             var comp = this;
             setTimeout(function() {
                 comp.$.body.style.clip = comp.clipOpen;
