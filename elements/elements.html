@@ -15361,7 +15361,7 @@ X.prototype.Ze=function(a,b){D("Firebase.resetPassword",1,2,arguments.length);sg
           case 'google':
           case 'github':
           case 'twitter':
-            if (params.token) {
+            if (params && params.token) {
               this.ref.authWithOAuthToken(this.provider, params.token, this._loginHandler.bind(this), params);
             } else if (this.redirect) {
               this.ref.authWithOAuthRedirect(this.provider, this._loginHandler.bind(this), params);
@@ -15527,7 +15527,6 @@ X.prototype.Ze=function(a,b){D("Firebase.resetPassword",1,2,arguments.length);sg
     }
   });
 </script>
-
 <link href="http://fonts.googleapis.com/css?family=Rancho&amp;text=Sounak%20Pal&amp;effect=shadow-multiple" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Lobster|Merriweather" rel="stylesheet" type="text/css">
 <style is="custom-style">
@@ -16413,13 +16412,13 @@ Polymer({
             color: var(--grey-rgba);
             font-size: 12px;
         }
-        
+
         .header> * {
             @apply(--layout-flex);
 
             user-select:none;
         }
-        
+
         .img img {
             border-radius: 50%;
             border: 6px solid var(--grey-alpha);
@@ -16428,7 +16427,7 @@ Polymer({
             -moz-box-sizing: border-box;
             box-sizing: border-box;
         }
-        
+
         .likes {
             @apply(--layout-horizontal);
             text-align: left;
@@ -16440,7 +16439,7 @@ Polymer({
           margin-top: 5px;
           color: var(--grey-rgba);
         }
-        
+
         .time {
           text-align: right;
         }
@@ -16456,7 +16455,7 @@ Polymer({
             position: relative;
             padding: 2px 5px 2px 8px;
             cursor: pointer;
-        } 
+        }
         #delete {
           padding: 2px 5px;
         }
@@ -16495,7 +16494,7 @@ Polymer({
             -o-transform-origin: 0 100%;
             transform-origin: 0 100%;
         }
-        
+
         #heart.active:before,
         #heart.active:after{
           background: red!important;
@@ -16520,7 +16519,7 @@ Polymer({
               -moz-flex: 0;
               -ms-flex: 0;
               -o-flex: 0;
-              flex: 0;    
+              flex: 0;
         }
         :host([other-style]) img {
           position: absolute;
@@ -16547,7 +16546,7 @@ Polymer({
             -o-transform: scale(1);
             transform: scale(1);
           }
-        
+
           50% {
             -webkit-transform: scale(1.1);
             -ms-transform: scale(1.1);
@@ -16568,7 +16567,7 @@ Polymer({
             -o-transform: scale(1);
             transform: scale(1);
           }
-        
+
           50% {
             -webkit-transform: scale(1.1);
             -ms-transform: scale(1.1);
@@ -16589,7 +16588,7 @@ Polymer({
             -o-transform: scale(1);
             transform: scale(1);
           }
-        
+
           50% {
             -webkit-transform: scale(1.1);
             -ms-transform: scale(1.1);
@@ -16627,7 +16626,7 @@ Polymer({
                     <div>[[getDate(chatItem.time)]]</div>
                 </div>
             </div>
-            <div class="name">[[userData.full_name]]</div>
+            <div class="name">[[userData.fullName]]</div>
             <div class="message">[[chatItem.msg]]</div>
         </div>
     </template>
@@ -16723,7 +16722,7 @@ Polymer({
       return false;
     }
 
-    if(checkDuplicate(this.chatItem.likes, this.user.uid)) { 
+    if(checkDuplicate(this.chatItem.likes, this.user.uid)) {
         this.fire('remove-like',{
           'item':this.chatItem,
           'key':key
@@ -16758,7 +16757,7 @@ Polymer({
             border: none;
             border-bottom: solid 2px #c9c9c9;
             box-shadow: inset 0px 1px 23px -7px #707070;
-            
+
             outline: 0;
             height: 100%;
             max-height: 100%;
@@ -16771,7 +16770,7 @@ Polymer({
             resize: none;
           @apply(--message-text);
         }
-        
+
         textarea:focus,
         textarea.focus {
             border-bottom: solid 2px #969696;
@@ -16793,6 +16792,14 @@ Polymer({
             @apply(--layout-start);
             height: 70px;
         }
+        .chatImage{
+          width: 50px;
+          height: 50px;
+          background-repeat: no-repeat;
+          background-size: cover;
+          margin-right: 5px;
+          border-radius: 50%;
+        }
         e-button{
           background: var(--grey-rgba);
           height: 100%;
@@ -16805,13 +16812,13 @@ textarea.error::-webkit-input-placeholder {
    color: red;
 }
 textarea.error:-moz-placeholder { /* Firefox 18- */
-   color: red;  
+   color: red;
 }
 textarea.error::-moz-placeholder {  /* Firefox 19+ */
-   color: red;  
+   color: red;
 }
-textarea.error:-ms-input-placeholder {  
-   color: red;  
+textarea.error:-ms-input-placeholder {
+   color: red;
 }
         </style>
         <firebase-collection id="chat" location="https://sounak.firebaseio.com/chat" data="{{chats}}"></firebase-collection>
@@ -16819,11 +16826,11 @@ textarea.error:-ms-input-placeholder {
         <div class="layout">
             <div class="chat-area">
                 <template is="dom-repeat" items="{{chats}}" as="chat">
-                    <e-chat-item other-style="" chat-item="[[chat]]" user="[[user]]" on-like="like" on-child-added="runScroll" on-remove-like="removeLike" on-remove-item="fireRemoved"></e-chat-item>
+                    <e-chat-item chat-item="[[chat]]" user="[[user]]" on-like="like" on-child-added="runScroll" on-remove-like="removeLike" on-remove-item="fireRemoved"></e-chat-item>
                 </template>
             </div>
             <div class="chatbox-area">
-                <img src="login/%7B%7B]%7D" alt="">
+              <div class="chatImage" style$="background-image:url([[currentUserImageUrl]])"></div>
               <div class="text-area">
                 <textarea placeholder="Write a post..." name="chatbox" on-input="validate" id="chatbox" cols="30" rows="10" value="{{chatMsg::input}}"></textarea>
               </div>
@@ -16839,6 +16846,11 @@ Polymer({
     properties: {
 
         fireAdd: {
+            type: String,
+            value: ''
+        },
+
+        currentUserImageUrl: {
             type: String,
             value: ''
         },
@@ -16968,7 +16980,7 @@ Polymer({
         color: white;
         font-family:"Merriweather Sans", sans-serif;
         font-size: 14px;
-        margin-bottom: 15px;
+        margin: 15px auto;
         width: 205px;
         border-bottom: 2px solid transparent;
         border-left: 1px solid transparent;
@@ -16990,148 +17002,59 @@ Polymer({
 }
  .twitter {
     background-image: url("login/twitterbird.png"), -webkit-gradient(linear, left top, left bottom, color-stop(1%, #00aced), color-stop(99%, #00a9ff));
-    ;
 }
 
-    .app,.chat{
-        @apply(--layout-horizontal);
-        height: 100%;
+    .app{
+        @apply(--layout-vertical);
         overflow: hidden;
         background: #ecf0f1;
     }
-    .app > *{
-        @apply(--layout-flex);
-        
+    .app {
+        height: 100%;
+    }
+    .app .chat{
+      height: 84%;
+      max-width: 600px;
+      margin: 0 auto;
     }
     .loginMenu{
-        @apply(--layout-vertical);
-    }
-    .loginMenu > *{
-        @apply(--layout-flex);
-        @apply(--layout-horizontal);
-        border-top: 1px solid var(--grey-bbb);
-
-        text-decoration: none;
-        width: 100%;
-    }
-    .links{
-      max-height: 38px;
-    }
-    .links > *{
-        @apply(--layout-flex);
-        @apply(--layout-horizontal);
-        @apply(--layout-center);
-        @apply(--layout-center-justified);
-        color: var(--grey-bbb);
-        background: var(--grey-alpha);
-        border-right: 1px solid var(--grey-bbb);
-
-        text-decoration: none;
-        padding: 10px 0;
-        width: 100%;
-    }
-    .links > *:hover{
-        background: var(--grey-bbb);
-        color: var(--grey-alpha);
+      height: 16%;
     }
     e-chat{
       height: 100%;
-      width: 100%;
+      }
+      .social-wrap{ max-width: 600px; text-align: center; color: var(--grey-bbb); }
+    .smiley{
+    transform: rotate(90deg);
+    display: inline-block;
+    margin-left: 5px;
     }
-    .contact{
 
-        @apply(--layout-flex);
-    }
-    .text{
-      @apply(--layout-self-end);
-      color: var(--grey-bbb);
-      margin-bottom: 10px;
-    }
-.typo{
-  font-size: 1rem;
-  margin: 10px 0 0 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 100%;
-  animation: type 4s steps(60, end); 
-}
-.typo:nth-child(2){
-  animation: type2 8s steps(60, end);
-}
-.typo a{
-  color: lime;
-  text-decoration: none;
-}
-
-.typo span{
-  animation: blink 1s infinite;
-}
-
-@keyframes type{ 
-  from { width: 0; } 
-} 
-
-@keyframes type2{
-  0%{width: 0;}
-  50%{width: 0;}
-  100%{ width: 100; } 
-} 
-
-@keyframes blink{
-  to{opacity: .0;}
-}
-
-.photo{
-  height:50%;
-  @apply(--layout-center);
-  @apply(--layout-center-justified);
-
-    background-size: contain;
-  background:  url("login/1.png") no-repeat center center;
-  animation-name: bgImage;
-  animation-duration: 1s; 
-  animation-timing-function: step-end; 
-  animation-delay: 0;
-  animation-direction: alternate;
-  animation-iteration-count: 8;
-}
-
-@keyframes bgImage{
-  0%{background: #ecf0f1 url("login/1.png") no-repeat center center}
-  25%{background: #ecf0f1 url("login/3.png") no-repeat center center}
-  50%{background: #ecf0f1 url("login/2.png") no-repeat center center}
-  75%{background: #ecf0f1 url("login/1.png") no-repeat center center}
-  100%{ background: #ecf0f1 url("login/3.png") no-repeat center center} 
-} 
-
-::selection{
-  background: black;
-}
     </style>
-    <firebase-auth id="firebaseLogin" params="{&quot;rememberMe&quot;: true,&quot;scope&quot;: &quot;email,user_likes&quot;}" user="{{user}}" status-known="{{statusKnown}}" location="https://sounak.firebaseio.com/" provider="{{provider}}" on-error="errorHandler" on-login="userSuccessHandler"></firebase-auth>
+    <firebase-auth id="firebaseLogin" params="[[params]]" user="{{user}}" status-known="{{statusKnown}}" location="https://sounak.firebaseio.com/" provider="{{provider}}" on-error="errorHandler" on-login="userSuccessHandler"></firebase-auth>
 
-    
-    
+
     <template is="dom-if" if="{{computeLogoutHidden(statusKnown, user)}}">
       <div class="fit">
         <div class="social-wrap c">
-            <button on-click="login" class="facebook" value="facebook">Sign in with Facebook</button>
-            <button on-click="login" class="twitter" value="twitter">Sign in with Twitter</button>
-            <button on-click="login" class="googleplus" value="googleplus">Sign in with Google</button>
+          <h1>Hi, please login to let me know you were here. No spams <span class="smiley">:)</span></h1>
+          <button on-click="login" class="facebook" value="facebook">Sign in with Facebook</button>
+          <button on-click="login" class="twitter" value="twitter">Sign in with Twitter</button>
+          <button on-click="login" class="googleplus" value="google">Sign in with Google</button>
         </div>
       </div>
     </template>
-   
+
     <template is="dom-if" if="{{computeLoginHidden(statusKnown, user)}}">
       <div class="app">
         <div class="loginMenu">
-          
+
           <div><span>Contact</span></div>
           <div class="photo">
             <div class="text"><em>
               <div class="typo">hi folks, thanks for coming this far.</div>
-              <div class="typo">Post a comment on the right 
-              :)<span>|</span></div></em> 
+              <div class="typo">Post a comment on the right
+              :)<span>|</span></div></em>
             </div>
           </div>
           <div class="links">
@@ -17141,11 +17064,11 @@ Polymer({
           </div>
         </div>
         <div class="chat">
-          <e-chat user="{{user}}"></e-chat>
+          <e-chat user="{{user}}" current-user-image-url="[[currentUserImageUrl]]"></e-chat>
         </div>
       </div>
     </template>
-    
+
   </template>
 </dom-module>
 <script>
@@ -17186,24 +17109,27 @@ Polymer({
     },
 
     login: function(e) {
-      var params;
-
-      try {
-        params = JSON.parse(this.params);
-      } catch (e) {
-        params = null;
-      }
-      console.log(e.srcElement.value);
       this.provider = e.srcElement.value;
-      if (this.provider === 'password') {
-        params = params || {};
-        params.email = this.email;
-        params.password = this.password;
+      this._setProviderScopes(this.provider);
+      this.$.firebaseLogin.login();
+    },
+    _setProviderScopes: function(provider){
+      switch(provider) {
+          case 'facebook':
+              this.params = {'rememberMe': true,'scope': 'email,user_likes'};
+              break;
+          case 'google':
+              this.params = {'rememberMe': true,'scope': 'email'};
+              break;
+          default:
+              this.params = {'rememberMe': true,'scope': 'email'};
+              this.params = null;
       }
 
-      this.$.firebaseLogin.login(params);
     },
+    _saveDataAtFirebase: function(){
 
+    },
     logout: function() {
       this.$.firebaseLogin.logout();
     },
@@ -17213,18 +17139,26 @@ Polymer({
     },
 
     userSuccessHandler: function(e) {
+      this.provider = e.detail.user.provider;
       console.log(e);
       if(!this.user){
         return;
       }
       var usersRef = ref.child('users');
-      var uid = e.detail.user.uid;
-      usersRef.child(uid).update({
-          'full_name': e.detail.user.facebook.displayName,
-          'email': e.detail.user.facebook.email,
-          'photo':e.detail.user.facebook.profileImageURL
-        });
-      this.message = e.type + ' success!';
+      var uid = e.detail.user.uid;/*
+      if(uid.indexOf(':') > 0){
+        uid = uid.replace(':','');
+      }*/
+      var userObject = {};
+      userObject.fullName = e.detail.user[this.provider].displayName;
+      if(e.detail.user[this.provider].email){
+        userObject.email = e.detail.user[this.provider].email;
+      }
+      userObject.photo =e.detail.user[this.provider].profileImageURL;
+      //firebase call
+      usersRef.child(uid).update(userObject);
+
+      this.currentUserImageUrl = userObject.photo;
     },
 
     computeLoginHidden: function(statusKnown, user) {
@@ -17358,7 +17292,7 @@ Polymer({
                 <iron-selector attr-for-selected="name" on-iron-select="_activeMenu" id="selector" selected="{{selected}}">
 
                 <e-animate delay="100" active="[[active]]" name="home" animate-class="fadeInLeft">
-                    <a href="{{baseUrl}}" name="home">home</a>
+                    <a href="/" name="home">home</a>
                     </e-animate>
 
                 <e-animate delay="200" active="[[active]]" name="sounakcan" animate-class="fadeInLeft">
@@ -18118,7 +18052,7 @@ Polymer({
                 <div id="overlay"></div>
                 <e-animate id="bannerText" active="" animate-class="bounceInUp">
                     <div class="header">
-                        I can create awsome websites and webapps using
+                        I can create awesome websites and webapps using
                     </div>
                 </e-animate>
             </div>
@@ -18151,7 +18085,7 @@ Polymer({
     loadImage: function () {
         var arr = ['bower', 'git', 'grunt', 'jquery', 'node', 'polymer', 'sass'],
             container = this.$.imgContainer;
-            console.log(container);
+            //console.log(container);
         for (var x = 0; x < arr.length; x++) {
             var div = document.createElement('div');
             div.className = 'item';
@@ -18314,8 +18248,8 @@ Polymer({
         }
 
         .section-box {
-            min-width: 30%;
             @apply(--layout-self-start);
+            @apply(--layout-flex);
             border: 1px solid var(--grey-bbb);
             background: var(--grey-alpha);
             margin-top: 20px;
@@ -18379,6 +18313,10 @@ Polymer({
             background-size: cover;
             margin: 0 auto;
         }
+        .section-row .divider{
+          visibility: hidden;
+        }
+
 
 @media (min-width: 768px){
         .header,
@@ -18395,8 +18333,6 @@ Polymer({
             width: 1px;
             margin: 10px;
         }
-
-
 }
         </style>
         <div class="body" id="body">
@@ -20799,7 +20735,170 @@ Polymer({
 
 });
 </script>
-<dom-module is="e-work-overlay">
+
+<dom-module id="device-view" assetpath="device-view/">
+
+  
+
+  <template><style>
+:host {
+  display: block;
+  position: relative;
+}
+:host([device=phone]) {
+  width: 360px;
+  height: 640px;
+    margin: 65px auto;
+}
+
+:host([device=phone][landscape]) {
+  width: 640px;
+  height: 360px;
+}
+
+:host([device=tablet]) {
+    width: 768px;
+    height: 1024px;/*
+    -webkit-transform: scale(0.7);
+        -ms-transform: scale(0.7);
+            transform: scale(0.7);   */
+    margin: 65px auto;
+  }
+
+:host([device=tablet][landscape]) {
+  width: 1024px;
+  height: 768px;
+}
+
+:host([device=phone]):before,
+:host([device=tablet]):before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: -60px -16px -96px -16px;
+  border-radius: 32px;
+  background: #666;
+  @apply(--shadow-elevation-16dp);
+}
+
+:host([device=phone][landscape]):before,
+:host([device=tablet][landscape]):before {
+  margin: -16px -96px -16px -60px;
+}
+
+:host([device=phone]):after,
+:host([device=tablet]):after {
+  display: block;
+  content: "";
+  position: absolute;
+  bottom: -76px;
+  left: 50%;
+  width: 56px;
+  height: 56px;
+  margin-left: -28px;
+  border-radius: 28px;
+  background: #fff;
+}
+
+:host([device=phone][landscape]):after,
+:host([device=tablet][landscape]):after {
+  top: 50%;
+  right: -76px;
+  bottom: auto;
+  left: auto;
+  margin-top: -28px;
+}
+/*
+:host([device=laptop]) {
+  width: 1366px;
+  height: 800px;
+}
+
+:host([device=laptop]):before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: -24px;
+  border-radius: 12px;
+  background: #666;
+}
+
+:host([device=laptop]):after {
+  display: block;
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -56px;
+  left: -140px;
+  height: 56px;
+  margin: -24px;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  background: #777;
+  @apply(--shadow-elevation-16dp);
+}
+*/
+iframe {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border: 0;
+}
+
+</style>
+    <style>
+      iframe::-webkit-scrollbar { width: 4px; height: 4px; background: transparent; }
+      iframe::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.5); -webkit-border-radius: 4px; border-radius: 4px; width: 4px; height: 4px; }
+
+    </style>
+    <iframe src="{{src}}"></iframe>
+      
+  </template>
+
+  <script>
+    Polymer({
+      is: 'device-view',
+      properties: {
+        /**
+         * The url of the page to show.
+         */
+        src: String,
+        /**
+         * The device layout to show.  Possible values are `phone`, `tablet` and `laptop`.
+         */
+        device: {
+          type: String,
+          value: 'laptop',
+          reflectToAttribute: true
+        },
+        /**
+         * Use landscape orientaion if this is true.
+         */
+        landscape: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true
+        }
+      },
+      /**
+       * Toggles the landscape orientation.
+       */
+      toggleLandscape: function() {
+        this.landscape = !this.landscape;
+      }
+    });
+  </script>
+
+</dom-module><dom-module is="e-work-overlay">
     <template>
         <style>
         :host {
@@ -20863,6 +20962,10 @@ Polymer({
             text-indent: 0px;
         }
 
+        #device {
+            transform: scale(0.5);
+        }
+
         @media(min-width: 768px) {
             #body {
                 @apply(--layout-horizontal);
@@ -20888,33 +20991,34 @@ Polymer({
             <span class="close" on-click="closeClip"></span>
             
             <e-animate class="content" id="animate" delay="1000" animate-class="fadeInUp">
-                <div>
-                    <div class="item-text">
-                        <h2 class="heading">Project</h2>
-                        <div class="heading">[[data.project]]</div>
-                        <span>[[data.description]]</span>
-                        <a href$="[[data.url]]" target="_blank">Check live</a>
-                    </div>
-                    <div class="item-text">
-                        <h2 class="heading">Date</h2>
-                        <div>[[data.date]]</div>
-                    </div>
-                    <div class="item-text">
-                        <h2 class="heading">My role:</h2>
-                        <div>[[data.role]]</div>
-                    </div>
-                    <div class="item-text">
-                        <h2 class="heading">While working for:</h2>
-                        <div>[[data.description]]</div>
-                    </div>
-                    <div class="item-text">
-                        <h2 class="heading">Skills Used</h2>
-                        <div>[[data.skills]]</div>
-                    </div>
+                <div class="item-text">
+                    <h2 class="heading">Project</h2>
+                    <div class="heading">[[data.project]]</div>
+                    <span>[[data.description]]</span>
+                    <a href$="[[data.url]]" target="_blank">Check live</a>
+                </div>
+                <div class="item-text">
+                    <h2 class="heading">Date</h2>
+                    <div>[[data.date]]</div>
+                </div>
+                <div class="item-text">
+                    <h2 class="heading">My role:</h2>
+                    <div>[[data.role]]</div>
+                </div>
+                <div class="item-text">
+                    <h2 class="heading">While working for:</h2>
+                    <div>[[data.description]]</div>
+                </div>
+                <div class="item-text">
+                    <h2 class="heading">Skills Used</h2>
+                    <div>[[data.skills]]</div>
                 </div>
             </e-animate>
+            <div class="content">
+                <device-view id="device" src$="[[data.url]]" device="phone"></device-view>
+            <div>
         </div>
-    </template>
+    </div></div></template>
     <script>
     Polymer({
         is: 'e-work-overlay',
@@ -20947,21 +21051,21 @@ Polymer({
         ready: function() {
 
         },
-        _getUrl: function() {
+        _getUrl: function() {/*
             if (this.$.animate.active) {
                 this.animate();
             }
             if (!this.data) {
                 return;
             }
-    if (this.widthOffset < 768) {
-        console.log('url(components/work/img/' + this.data.name + '-phone.png)');
-        this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-320.jpg)';
-    } else if (this.widthOffset >= 768 && this.widthOffset < 1024) {
-        this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-768.jpg)';
-    } else {
-        this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-1024.jpg)';
-    }
+            if (this.widthOffset < 768) {
+                console.log('url(components/work/img/' + this.data.name + '-phone.png)');
+                this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-320.jpg)';
+            } else if (this.widthOffset >= 768 && this.widthOffset < 1024) {
+                this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-768.jpg)';
+            } else {
+                this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-1024.jpg)';
+            }*/
         },
 
         _setClip: function() {
