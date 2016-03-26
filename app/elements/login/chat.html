@@ -46,6 +46,14 @@
             @apply(--layout-start);
             height: 70px;
         }
+        .chatImage{
+          width: 50px;
+          height: 50px;
+          background-repeat: no-repeat;
+          background-size: cover;
+          margin-right: 5px;
+          border-radius: 50%;
+        }
         e-button{
           background: var(--grey-rgba);
           height: 100%;
@@ -76,7 +84,7 @@ textarea.error:-ms-input-placeholder {
                 </template>
             </div>
             <div class="chatbox-area">
-                <img src="{{]}" alt="">
+              <div class="chatImage" style$="background-image:url([[currentUserImageUrl]])"></div>
               <div class="text-area">
                 <textarea placeholder="Write a post..." name="chatbox" on-input="validate" id="chatbox" cols="30" rows="10" value="{{chatMsg::input}}"></textarea>
               </div>
@@ -92,6 +100,11 @@ Polymer({
     properties: {
 
         fireAdd: {
+            type: String,
+            value: ''
+        },
+
+        currentUserImageUrl: {
             type: String,
             value: ''
         },

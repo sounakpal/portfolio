@@ -32,13 +32,13 @@
             color: var(--grey-rgba);
             font-size: 12px;
         }
-        
+
         .header> * {
             @apply(--layout-flex);
 
             user-select:none;
         }
-        
+
         .img img {
             border-radius: 50%;
             border: 6px solid var(--grey-alpha);
@@ -47,7 +47,7 @@
             -moz-box-sizing: border-box;
             box-sizing: border-box;
         }
-        
+
         .likes {
             @apply(--layout-horizontal);
             text-align: left;
@@ -59,7 +59,7 @@
           margin-top: 5px;
           color: var(--grey-rgba);
         }
-        
+
         .time {
           text-align: right;
         }
@@ -75,7 +75,7 @@
             position: relative;
             padding: 2px 5px 2px 8px;
             cursor: pointer;
-        } 
+        }
         #delete {
           padding: 2px 5px;
         }
@@ -114,7 +114,7 @@
             -o-transform-origin: 0 100%;
             transform-origin: 0 100%;
         }
-        
+
         #heart.active:before,
         #heart.active:after{
           background: red!important;
@@ -139,7 +139,7 @@
               -moz-flex: 0;
               -ms-flex: 0;
               -o-flex: 0;
-              flex: 0;    
+              flex: 0;
         }
         :host([other-style]) img {
           position: absolute;
@@ -166,7 +166,7 @@
             -o-transform: scale(1);
             transform: scale(1);
           }
-        
+
           50% {
             -webkit-transform: scale(1.1);
             -ms-transform: scale(1.1);
@@ -187,7 +187,7 @@
             -o-transform: scale(1);
             transform: scale(1);
           }
-        
+
           50% {
             -webkit-transform: scale(1.1);
             -ms-transform: scale(1.1);
@@ -208,7 +208,7 @@
             -o-transform: scale(1);
             transform: scale(1);
           }
-        
+
           50% {
             -webkit-transform: scale(1.1);
             -ms-transform: scale(1.1);
@@ -246,7 +246,7 @@
                     <div>[[getDate(chatItem.time)]]</div>
                 </div>
             </div>
-            <div class="name">[[userData.full_name]]</div>
+            <div class="name">[[userData.fullName]]</div>
             <div class="message">[[chatItem.msg]]</div>
         </div>
     </template>
@@ -342,7 +342,7 @@ Polymer({
       return false;
     }
 
-    if(checkDuplicate(this.chatItem.likes, this.user.uid)) { 
+    if(checkDuplicate(this.chatItem.likes, this.user.uid)) {
         this.fire('remove-like',{
           'item':this.chatItem,
           'key':key

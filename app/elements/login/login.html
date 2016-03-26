@@ -10,234 +10,307 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-auth.html">
 <link rel="import" href="../shared-styles/shared-styles.html">
+<link rel="import" href="../menu/menu.html">
 <link rel="import" href="chat.html">
 <dom-module id="e-login">
-  <template>
-    <style>
-      :host{
-        display: block;
-        overflow: auto;
-        height: 100%;
-        @apply(--normal-text);
-      }
-      .fit{
-        @apply(--layout-fit);
-        @apply(--layout-horizontal);
-        @apply(--layout-center-justified);
-        @apply(--layout-center);
-        background: var(--grey-alpha);
-      }
-      button {
-        padding-left: 35px;
-        padding-right: 0px;
-        height: 35px;
-        background: none;
-        border: none;
-        display: block;
-        background-size: 25px 25px, cover;
-        background-position: 10px center, center center;
-        background-repeat: no-repeat, repeat;
-        border-radius: 4px;
-        color: white;
-        font-family:"Merriweather Sans", sans-serif;
-        font-size: 14px;
-        margin: 15px auto;
-        width: 205px;
-        border-bottom: 2px solid transparent;
-        border-left: 1px solid transparent;
-        border-right: 1px solid transparent;
-        box-shadow: 0 4px 2px -2px gray;
-        text-shadow: rgba(0, 0, 0, .4) -1px -1px 0;
-      }
+    <template>
+        <style include="e-menu">
+        :host {
+            display: block;
+            overflow: auto;
+            height: 100%;
+            @apply(--normal-text);
+            position: relative;
+            top: 0;
+            right: 0;
+        }
 
- .googleplus {
-    background-size: 30px 30px, cover;
-    background-image: url(gplus.png), -webkit-gradient(linear, left top, left bottom, color-stop(1%, #FF2E74), color-stop(100%, #CE1471));
-    ;
-}
- .facebook {
-    background: url(facebookf.png), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4c74c4), color-stop(100%, #3b5998));
-    background-size: 25px 25px, cover;
-    background-position: 10px center, center center;
-    background-repeat: no-repeat, repeat;
-}
- .twitter {
-    background-image: url(twitterbird.png), -webkit-gradient(linear, left top, left bottom, color-stop(1%, #00aced), color-stop(99%, #00a9ff));
-}
+        .fit {
+            @apply(--layout-fit);
+            @apply(--layout-horizontal);
+            @apply(--layout-center-justified);
+            @apply(--layout-center);
+            background: var(--grey-alpha);
+        }
 
-    .app{
-        @apply(--layout-vertical);
-        overflow: hidden;
-        background: #ecf0f1;
-    }
-    .app {
-        height: 100%;
-    }
-    .app .chat{
-      height: 84%;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .loginMenu{
-      height: 16%;
-    }
-    e-chat{
-      height: 100%;
-      }
+        .button {
+            padding-left: 35px;
+            padding-right: 0px;
+            height: 35px;
+            background: none;
+            border: none;
+            display: block;
+            background-size: 25px 25px, cover;
+            background-position: 10px center, center center;
+            background-repeat: no-repeat, repeat;
+            border-radius: 4px;
+            color: white;
+            font-family: "Merriweather Sans", sans-serif;
+            font-size: 14px;
+            margin: 15px auto;
+            width: 205px;
+            border-bottom: 2px solid transparent;
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+            box-shadow: 0 4px 2px -2px gray;
+            text-shadow: rgba(0, 0, 0, .4) -1px -1px 0;
+        }
+
+        .googleplus {
+            background-size: 30px 30px, cover;
+            background-image: url(gplus.png), -webkit-gradient(linear, left top, left bottom, color-stop(1%, #FF2E74), color-stop(100%, #CE1471));
+            ;
+        }
+
+        .facebook {
+            background: url(facebookf.png), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4c74c4), color-stop(100%, #3b5998));
+            background-size: 25px 25px, cover;
+            background-position: 10px center, center center;
+            background-repeat: no-repeat, repeat;
+        }
+
+        .twitter {
+            background-image: url(twitterbird.png), -webkit-gradient(linear, left top, left bottom, color-stop(1%, #00aced), color-stop(99%, #00a9ff));
+        }
+
+        .app {
+            @apply(--layout-horizontal);
+            overflow: hidden;
+            background: #ecf0f1;
+        }
+
+        .app {
+            height: 100%;
+            width: 100%;
+        }
+
+        .app .chat,
+        #leftPanel {
+            @apply(--layout-flex) height: 100%;
+        }
+
+        #leftPanel {
+            @apply(--layout-fit);
+            z-index: 11;
+            transition: 0.3s ease transform;
+            transform: translateX(calc(-100% + 60px));
+        }
+
+        #leftPanel.active {
+            transform: translateX(0);
+        }
+
+        .leftPanel-body {
+            height: 100%;
+            width: -moz-calc(100% - 60px);
+            width: -webkit-calc(100% - 60px);
+            width: -o-calc(100% - 60px);
+            width: calc(100% - 60px);
+            background: var(--grey-alpha);
+            border-right: 1px solid var(--grey-bbb);
+        }
+
+        .hamburgerComtainer {
+            right: 0px;
+            position: absolute;
+            box-sizing: border-box;
+            padding: 10px;
+            background: var(--grey-alpha);
+            height: 60px;
+            transform: translateY(50px);
+            border: 1px solid var(--grey-bbb);
+            border-left: 0!important;
+            width: 60px;
+        }
+
+        #leftPanel.active .hamburgerComtainer {
+            transform: translateY(50px);
+        }
+        /*
       .social-wrap{ max-width: 600px; text-align: center; color: var(--grey-bbb); }
-    .smiley{
-    transform: rotate(90deg);
-    display: inline-block;
-    margin-left: 5px;
-    }
+           */
 
-    </style>
-    <firebase-auth id="firebaseLogin" params="[[params]]" user="{{user}}" status-known="{{statusKnown}}" location="https://sounak.firebaseio.com/" provider="{{provider}}" on-error="errorHandler" on-login="userSuccessHandler"></firebase-auth>
-
-
-    <template is="dom-if" if="{{computeLogoutHidden(statusKnown, user)}}">
-      <div class="fit">
-        <div class="social-wrap c">
-          <h1>Hi, please login to let me know you were here. No spams <span class="smiley">:)</span></h1>
-          <button on-click="login" class="facebook" value="facebook">Sign in with Facebook</button>
-          <button on-click="login" class="twitter" value="twitter">Sign in with Twitter</button>
-          <button on-click="login" class="googleplus" value="google">Sign in with Google</button>
-        </div>
-      </div>
-    </template>
-
-    <template is="dom-if" if="{{computeLoginHidden(statusKnown, user)}}">
-      <div class="app">
-        <div class="loginMenu">
-
-          <div><span>Contact</span></div>
-          <div class="photo">
-            <div class="text"><em>
+        .smiley {
+            transform: rotate(90deg);
+            display: inline-block;
+            margin-left: 5px;
+        }
+        </style>
+        <firebase-auth id="firebaseLogin" params="[[params]]" user="{{user}}" status-known="{{statusKnown}}" location="https://sounak.firebaseio.com/" provider="{{provider}}" on-error="errorHandler" on-login="userSuccessHandler"></firebase-auth>
+        <template is="dom-if" if="{{computeLogoutHidden(statusKnown, user)}}">
+            <div class="fit">
+                <div class="social-wrap c">
+                    <h1>Hi, please login to let me know you were here. No spams <span class="smiley">:)</span></h1>
+                    <button on-click="login" class="button facebook" value="facebook">Sign in with Facebook</button>
+                    <button on-click="login" class="button twitter" value="twitter">Sign in with Twitter</button>
+                    <button on-click="login" class="button googleplus" value="google">Sign in with Google</button>
+                </div>
+            </div>
+        </template>
+        <template is="dom-if" if="{{computeLoginHidden(statusKnown, user)}}">
+            <div class="app">
+                <div id="leftPanel">
+                    <div class="leftPanel-body">
+                        <div class="hamburgerComtainer" on-tap="_activeMenu">
+                            <a id="hamburger">
+                                <span></span>
+                            </a>
+                        </div>
+                        <div><span>Contact</span></div>
+                        <div class="photo">
+                            <div class="text"><em>
               <div class="typo">hi folks, thanks for coming this far.</div>
               <div class="typo">Post a comment on the right
               :)<span>|</span></div></em>
+                            </div>
+                        </div>
+                        <div class="links">
+                            <a href=""><span>Resume</span></a>
+                            <a href=""><span>Download</span> CV</a>
+                            <a on-tap="logout" style="border:0"><span>Logout</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat">
+                    <e-chat user="{{user}}" current-user-image-url="[[currentUserImageUrl]]"></e-chat>
+                </div>
             </div>
-          </div>
-          <div class="links">
-            <a href=""><span>Resume</span></a>
-            <a href=""><span>Download</span> CV</a>
-            <a on-tap="logout" style="border:0"><span>Logout</span></a>
-          </div>
-        </div>
-        <div class="chat">
-          <e-chat user="{{user}}"></e-chat>
-        </div>
-      </div>
+        </template>
     </template>
-
-  </template>
 </dom-module>
 <script>
-
-      var ref = new Firebase('https://sounak.firebaseio.com/');
-  Polymer({
+var ref = new Firebase('https://sounak.firebaseio.com/');
+Polymer({
     is: 'e-login',
 
     properties: {
 
-      fireAdd:{
-        type: String,
-        value: ''
-      },
+        fireAdd: {
+            type: String,
+            value: ''
+        },
 
-      provider: {
-        type: String
-      },
+        provider: {
+            type: String
+        },
 
-      message: {
-        type: String,
-        value: ''
-      },
+        message: {
+            type: String,
+            value: ''
+        },
 
-      user: {
-        type: Object,
-        value: null
-      },
+        user: {
+            type: Object,
+            value: null
+        },
 
-      reference: {
-        type: Object,
-        value: null
-      },
+        reference: {
+            type: Object,
+            value: null
+        },
 
-      statusKnown: {
-        type: Boolean
-      }
+        statusKnown: {
+            type: Boolean
+        }
     },
 
     login: function(e) {
-      this.provider = e.srcElement.value;
-      this._setProviderScopes(this.provider);
-      this.$.firebaseLogin.login();
+        this.provider = e.srcElement.value;
+        this._setProviderScopes(this.provider);
+        this.$.firebaseLogin.login();
     },
-    _setProviderScopes: function(provider){
-      switch(provider) {
-          case 'facebook':
-              alert('fb');
-              this.params = {"rememberMe": true,"scope": "email,user_likes"};
-              break;
-          case 'google':
-              alert('google');
-              this.params = {"rememberMe": true,"scope": "email"};
-              break;
-          default:
-              this.params = null;
-      }
+
+    _activeMenu: function() {
+        if (this.$$('#leftPanel').classList.contains('active')) {
+            this.$$('#leftPanel').classList.remove('active');
+            this.$$('#hamburger').classList.remove('active');
+        } else {
+            this.$$('#leftPanel').classList.add('active');
+            this.$$('#hamburger').classList.add('active');
+        }
+    },
+
+    _setProviderScopes: function(provider) {
+        switch (provider) {
+            case 'facebook':
+                this.params = {
+                    'rememberMe': true,
+                    'scope': 'email,user_likes'
+                };
+                break;
+            case 'google':
+                this.params = {
+                    'rememberMe': true,
+                    'scope': 'email'
+                };
+                break;
+            default:
+                this.params = {
+                    'rememberMe': true,
+                    'scope': 'email'
+                };
+                this.params = null;
+        }
 
     },
-    _saveDataAtFirebase: function(){
+    _saveDataAtFirebase: function() {
 
     },
     logout: function() {
-      this.$.firebaseLogin.logout();
+        this.$.firebaseLogin.logout();
     },
 
     errorHandler: function(e) {
-      this.message = 'Error: ' + e.detail.message;
+        this.message = 'Error: ' + e.detail.message;
     },
 
     userSuccessHandler: function(e) {
-      this.provider = e.detail.user.provider;
-      console.log(e);
-      if(!this.user){
-        return;
-      }
-      var usersRef = ref.child('users');
-      var uid = e.detail.user.uid;
-      usersRef.child(uid).update({
-          'full_name': e.detail.user[this.provider].displayName,
-          'email': e.detail.user[this.provider].email,
-          'photo':e.detail.user[this.provider].profileImageURL
-        });
+        this.provider = e.detail.user.provider;
+        console.log(e);
+        if (!this.user) {
+            return;
+        }
+        var usersRef = ref.child('users');
+        var uid = e.detail.user.uid;
+        /*
+              if(uid.indexOf(':') > 0){
+                uid = uid.replace(':','');
+              }*/
+        var userObject = {};
+        userObject.fullName = e.detail.user[this.provider].displayName;
+        if (e.detail.user[this.provider].email) {
+            userObject.email = e.detail.user[this.provider].email;
+        }
+        userObject.photo = e.detail.user[this.provider].profileImageURL;
+        //firebase call
+        usersRef.child(uid).update(userObject);
+
+        this.currentUserImageUrl = userObject.photo;
     },
 
     computeLoginHidden: function(statusKnown, user) {
-      return !statusKnown || !!user;
+        return !statusKnown || !!user;
     },
 
     computeLogoutHidden: function(statusKnown, user) {
-      return !statusKnown || !user;
+        return !statusKnown || !user;
     },
 
     computeLoginStatus: function(statusKnown, user) {
-      if (statusKnown && user) {
-        return 'Logged in';
-      }
+        if (statusKnown && user) {
+            return 'Logged in';
+        }
 
-      if (statusKnown) {
-        return 'Logged out';
-      }
+        if (statusKnown) {
+            return 'Logged out';
+        }
 
-      return 'Unknown (checking status...)';
+        return 'Unknown (checking status...)';
     }
 
 
 
 
 
-  });
+});
 </script>

@@ -1,0 +1,108 @@
+[ {
+  "company" : "Tavisca",
+  "date" : "Aug 2014",
+  "description" : "Web Components are a set of standards currently being produced by Google 
+  					engineers as a W3C specification that allow for the creation of reusable widgets or 
+  					components in web documents and web applications. The intention behind them is to bring 
+  					component-based software engineering to the World Wide Web. The components model allows 
+  					for encapsulation and interoperability of individual HTML elements.
+
+					Worked on hot new technology PolymerJS to introduce a new ERA of web development 
+					in Company to produce better application work flow 
+					and slowly bringing clients to the new platform.",
+  "name" : "atom",
+  "project" : "Atom",
+  "role" : "I was mostly creating base components like input, stepper, autosuggest 
+			in the elements tab of the page (check the page)
+  			 apart from these I also built the responsive layout from scratch.",
+  "skills" : "WebComponents, JS, HTML, PolymerJS, CSS, gulp",
+  "url" : "http://atomproject.github.io/elements/"
+}, {
+  "company" : "Tavisca",
+  "date" : "Aug 2014",
+  "description" : "A flight and hotel Booking Web application based on Web components built from Scratch using Atom(Component library of Tavisca) components. Application was written in ASP.net MVC 5 and polymerJS. This application is highly modular because of component based approach. There's not a single CSS file and entire theming is done from a single theme html file.",
+  "name" : "flight",
+  "project" : "Travelnxt Flight",
+  "role" : "Did full stack development of HTML5 web apps. 
+  			Built elegant and mobile user interfaces. 
+  			Implemented both client- and server-side logic and MVC architecture. 
+  			Wrote cross-browser and cross-device code. 
+  			 I also worked with design team to help design the user experience.",
+  "skills" : "WebComponents, JS, HTML, PolymerJS, CSS, MVC, gulp",
+  "url" : "http://mdemo.travelnxt.com/"
+}, {
+  "company" : "Harman",
+  "date" : "Aug 2014",
+  "description" : "The project was built on top of Demandware. 
+  					Demandware is a on-demand ecommerce platform combines the functionality, 
+  					flexibility and customization capabilities of an in-house application 
+  					with the operational benefits of the on-demand model, allowing you to 
+  					realize the full potential of the online channel. 
+  					The project was made with SASS and bootstrap 3.0. 
+  					Latest built techniques were also implemented.",
+  "name" : "harman",
+  "project" : "Harman Kardon",
+  "role" : "Built elegant and responsive user interfaces. 
+  			Wrote cross-browser and cross-device code.
+  			Worked on the grunt tasks for built.
+  			I have also implemented analytics in different interaction in the websites. 
+  			Made Demandware API calls to fetch user and cart data, and send it in the analytics. ",  
+  "skills" : "Demandware, html, css, js, bootstrap, jquery, grunt",
+  "url" : "http://harmankardon.com"
+}, {
+  "company" : "Harman",
+  "date" : "Aug 2014",
+  "description" : "The JBL shared the same infrastructure as harman kardon. check harman kardon description for details.",
+  "name" : "jbl",
+  "project" : "JBL",
+  "role" : "I had similar roles like harman kardon (please check harmankardon).
+  			I solely delivered the country routing flow in the website.",
+  "skills" : "Demandware, html, css, js, bootstrap, jquery, grunt",
+  "url" : "http://jbl.com"
+}, {
+  "company" : "Synechron",
+  "date" : "Aug 2014",
+  "description" : "The annual report for Landsecurities was a fun and challenging website to make.
+				 The website had complex animations to meet. Animated graphical representations.
+			 	 Html5 canvas implementation in few pages. All in all the effort was rewared with an award.",
+  "name" : "landsecurities",
+  "project" : "Landsecurities",
+  "role" : "Built elegant and responsive user interfaces. 
+  			Creeated css style guide for the project for other team members to consume.
+  			Wrote cross-browser and cross-device code.
+  			Worked on the grunt tasks for built.
+  			I have also implemented analytics in different interaction in the websites. 
+  			Made Demandware API calls to fetch user and cart data, and send it in the analytics.",
+  "skills" : "html, css, js, bootstrap, jquery, grunt",
+  "url" : "http://annualreport2014.landsecurities.com"
+}, {
+  "company" : "Harman",
+  "date" : "Aug 2014",
+  "description" : "This is the ecommerce for Mark Levinson.",
+  "name" : "mark&levinson",
+  "project" : "Mark Levinson",
+  "role" : "Something to think and write",
+  "skills" : "Demandware, html, css, js, bootstrap, jquery",
+  "url" : "http://www.marklevinson.com/"
+}, {
+  "company" : "Synechron",
+  "date" : "Aug 2014",
+  "description" : "This was a CMS for a US based drug Company.",
+  "name" : "silenor",
+  "project" : "Silenor",
+  "role" : " Collaborated with product managers and team members to gather requirements, design, and develop solutions. 
+  			Participated in software design meetings and analyze user needs to determine technical requirements. 
+  			Provided support for day-to-day operational work as needed.
+  			Provided mentorship and code reviews to junior team members",
+  "skills" : "html, css, js, bootstrap, jquery",
+  "url" : "http://www.silenor.com/"
+}, {
+  "company" : "Tavisca",
+  "date" : "Aug 2014",
+  "description" : "This is the documentation site of travelnxt apis.",
+  "name" : "demo",
+  "project" : "Travelnxt API",
+  "role" : "Something to think and write",
+  "skills" : "html, css, js, bootstrap, jquery",
+  "url" : "http://demo.travelnxt.com/dev/apis"
+} ]

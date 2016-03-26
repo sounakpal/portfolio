@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../animate/animate.html">
+<link rel="import" href="../device-view/device-view.html">
 <dom-module is="e-work-overlay">
     <template>
         <style>
@@ -8,16 +9,25 @@
             display: block;
             height: 100%;
             width: 100%;
+            background: var(--grey-alpha);
+            color: var(--grey-bbb);
         }
 
         .heading {
             @apply(--normal-text);
             margin: 10px 0;
-            font-size: 1rem;
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--grey-rgba);
+        }
+
+        .description-small {
+            font-size: 0.85rem;
         }
 
         .content {
-            padding: 0 20px;
+            @apply(--layout-flex);
+            padding: 0 50px;
             @apply(--message-text);
             text-align: center;
         }
@@ -34,10 +44,12 @@
             pointer-events: none;
             cursor: default;
             background: #fff;
-            padding: 20px 10;
+            padding: 20px 10px;
             overflow: auto;
             background-size: cover;
             background-repeat: no-repeat;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
         }
 
         .close {
@@ -65,6 +77,14 @@
             text-indent: 0px;
         }
 
+
+
+        .devider {
+            width: 100px;
+            height: 1px;
+            background: var(--grey-bbb);
+            margin: 20px auto 0;
+        }
         @media(min-width: 768px) {
             #body {
                 @apply(--layout-horizontal);
@@ -72,54 +92,54 @@
                 @apply(--layout-center);
             }
             .content {
-                @apply(--layout-flex);
-                @apply(--layout-vertical);
+                text-align: left;
             }
-            /* .image,
-            #body,
-            .image{
+            #device {
+                transform: scale(0.5);
             }
-            .image{
-                            @apply(--layout-center-justified);
-                            @apply(--layout-center);
-                            order:2;
-            } */
+            .content-2 {
+              @apply(--layout-flex-2);
+            }
+            .devider{
+              margin: 20px 0 0;
+            }
         }
         </style>
         <div id="body">
             <span class="close" on-click="closeClip"></span>
-            <!-- <e-animate class="image" active="{{active}}" delay="1s" animate-class="fadeInUp">
-                <div>
-                    <img id="img" src$="{{frontUrl}}" alt$="{{frontUrl}}" />
+            <template is="dom-if" if="[[queryMatches]]">
+                <e-animate class="content device" id="animate2" delay="1000" animate-class="fadeInDown">
+                    <device-view id="device" src$="[[data.url]]" device="phone"></device-view>
+                </e-animate>
+            </template>
+            <e-animate class="content content-2" id="animate" delay="1000" animate-class="fadeInUp">
+                <div class="item-text">
+                    <h2 class="heading">Project [[data.project]]</h2>
+                    <span class="description-small">[[data.description]]</span>
+                    <a href$="[[data.url]]" target="_blank">Check live</a>
                 </div>
-            </e-animate> -->
-            <e-animate class="content" id="animate" delay="1000" animate-class="fadeInUp">
-                <div>
-                    <div class="item-text">
-                        <h2 class="heading">Project</h2>
-                        <div class="heading">[[data.project]]</div>
-                        <span>[[data.description]]</span>
-                        <a href$="[[data.url]]" target="_blank">Check live</a>
-                    </div>
-                    <div class="item-text">
-                        <h2 class="heading">Date</h2>
-                        <div>[[data.date]]</div>
-                    </div>
-                    <div class="item-text">
-                        <h2 class="heading">My role:</h2>
-                        <div>[[data.role]]</div>
-                    </div>
-                    <div class="item-text">
-                        <h2 class="heading">While working for:</h2>
-                        <div>[[data.description]]</div>
-                    </div>
-                    <div class="item-text">
-                        <h2 class="heading">Skills Used</h2>
-                        <div>[[data.skills]]</div>
-                    </div>
+                <div class="devider"></div>
+                <div class="item-text">
+                    <h2 class="heading">My role:</h2>
+                    <div class="description-small">[[data.role]]</div>
+                </div>
+                <div class="devider"></div>
+                <div class="item-text">
+                    <h2 class="heading">Skills Used</h2>
+                    <div class="description-small">[[data.skills]]</div>
+                </div>
+                <div class="devider"></div>
+                <div class="item-text">
+                    <h2 class="heading">Date <div class="description-small">[[data.date]]</div></h2>
+                </div>
+                <div class="devider"></div>
+                <div class="item-text">
+                    <h2 class="heading">This was made while working for:
+                    <div class="description-small">[[data.description]]</div></h2>
                 </div>
             </e-animate>
         </div>
+        <iron-media-query query="(min-width: 768px)" query-matches="{{queryMatches}}"></iron-media-query>
     </template>
     <script>
     Polymer({
@@ -154,20 +174,21 @@
 
         },
         _getUrl: function() {
-            if (this.$.animate.active) {
-                this.animate();
-            }
-            if (!this.data) {
-                return;
-            }
-    if (this.widthOffset < 768) {
-        console.log('url(components/work/img/' + this.data.name + '-phone.png)');
-        this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-320.jpg)';
-    } else if (this.widthOffset >= 768 && this.widthOffset < 1024) {
-        this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-768.jpg)';
-    } else {
-        this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-1024.jpg)';
-    }
+            /*
+                        if (this.$.animate.active) {
+                            this.animate();
+                        }
+                        if (!this.data) {
+                            return;
+                        }
+                        if (this.widthOffset < 768) {
+                            console.log('url(components/work/img/' + this.data.name + '-phone.png)');
+                            this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-320.jpg)';
+                        } else if (this.widthOffset >= 768 && this.widthOffset < 1024) {
+                            this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-768.jpg)';
+                        } else {
+                            this.$.body.style.backgroundImage = 'url(components/work/img/' + this.data.name + '-1024.jpg)';
+                        }*/
         },
 
         _setClip: function() {
@@ -185,7 +206,12 @@
             this.$.body.style.opacity = 1;
             this.$.body.style.zIndex = 9999;
             this.$.body.style.pointerEvents = 'auto';
+            //setting animete to true
+
             this.$.animate.active = true;
+            if (this.queryMatches) {
+                this.$$('#animate2').active = true;
+            }
             var comp = this;
             setTimeout(function() {
                 comp.$.body.style.clip = comp.clipOpen;
@@ -200,6 +226,9 @@
 
             this.$.body.style.clip = this.clipClosed;
             this.$.animate.active = false;
+            if (this.queryMatches) {
+                this.$$('#animate2').active = false;
+            }
             var comp = this;
             setTimeout(function() {
                 comp.$.body.style.opacity = 0;

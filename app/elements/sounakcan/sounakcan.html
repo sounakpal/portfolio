@@ -26,6 +26,8 @@
             @apply(--layout-vertical);
             background: var(--grey-alpha);
             color: var(--grey-rgba);
+            text-align: center;
+            min-height: 100%;
         }
 
 
@@ -91,11 +93,11 @@
                 <div id="overlay"></div>
                 <e-animate id="bannerText" active animate-class="bounceInUp">
                     <div class="header">
-                        I can create awsome websites and webapps using
+                        I can create awesome websites and webapps using
                     </div>
                 </e-animate>
             </div>
-            <div class="full-page_content bottom">
+            <div class="bottom">
 
                 <div class="img__row--html"></div>
                 <div class="content--sub">
@@ -124,7 +126,7 @@ Polymer({
     loadImage: function () {
         var arr = ['bower', 'git', 'grunt', 'jquery', 'node', 'polymer', 'sass'],
             container = this.$.imgContainer;
-            console.log(container);
+            //console.log(container);
         for (var x = 0; x < arr.length; x++) {
             var div = document.createElement('div');
             div.className = 'item';

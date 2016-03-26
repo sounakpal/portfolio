@@ -108,26 +108,26 @@
             <div class="menu__content">
                 <iron-selector
                  attr-for-selected="name"
-                on-iron-select="_activeMenu"
+                on-iron-select="closeMenu"
                 id="selector"
                 selected="{{selected}}">
 
-                <e-animate delay="100" active="[[active]]" name="home" animate-class="fadeInLeft">
-                    <a href="{{baseUrl}}" name="home">home</a>
+                <e-animate delay="100" active="[[active]]" name="home" animate-class="[[animateClass]]">
+                    <a href="{{baseUrl}" name="home">home</a>
                     </e-animate>
 
-                <e-animate delay="200" active="[[active]]" name="sounakcan" animate-class="fadeInLeft">
+                <e-animate delay="200" active="[[active]]" name="sounakcan" animate-class="[[animateClass]]">
                     <a href="{{baseUrl}}sounakcan" name="sounakcan">what I can do</a>
                     </e-animate>
 
-                <e-animate delay="300" active="[[active]]" name="work" animate-class="fadeInLeft">
+                <e-animate delay="300" active="[[active]]" name="work" animate-class="[[animateClass]]">
                     <a href="{{baseUrl}}work" name="work">what I have done</a>
                     </e-animate>
 
-                <e-animate delay="400" active="[[active]]" name="resume" animate-class="fadeInLeft">
+                <e-animate delay="400" active="[[active]]" name="resume" animate-class="[[animateClass]]">
                     <a href="{{baseUrl}}resume" name="resume">my resume</a>
                     </e-animate>
-                <e-animate delay="500" active="[[active]]" name="login" animate-class="fadeInLeft">
+                <e-animate delay="500" active="[[active]]" name="login" animate-class="[[animateClass]]">
                     <a href="{{baseUrl}}login" name="login">hire me</a>
                 </e-animate>
                 </iron-selector>
@@ -155,18 +155,28 @@ Polymer({
             type:String,
             value:'home',
             notify:true
+        },
+
+        animateClass:{
+            type:String,
+            value:'fadeInLeft'
         }
     },
 
 
     _activeMenu: function() {
         if (this.active) {
-            this.$.hamburger.classList.remove('active');
+            this.closeMenu();
         } else {
             this.$.hamburger.classList.add('active');
+            this.active = true;
         }
-        this.active = !this.active;
-    }
+    },
+
+    closeMenu: function(){
+        this.$.hamburger.classList.remove('active');
+        this.active = false;
+    },
 
 });
 </script>
