@@ -34,6 +34,7 @@
 .sprite.mail { background-position: -702px 0; }
 .sprite.phone { background-position: -756px 0; }
 .sprite.skype { background-position: -810px 0; width: 44px; }
+.sprite.download{ background-position: -864px 0; width: 44px; }
 
         .divider {
             width: 70px;
@@ -109,7 +110,11 @@
             display: block;
             color: inherit;
         }
-
+        .about p{
+          line-height: 1.5;
+          font-weight: 100;
+          font-size: 0.9rem;
+        }
         .body h1,
         .body h3 {
             font-size: 1.2rem;
@@ -128,15 +133,18 @@
         .self-image {
             @apply(--border-circle);
             background: url("../../images/4.png") no-repeat cadetblue;
-            width: 120px;
-            height: 120px;
-            background-size: cover;
+            width: 100px;
+            height: 100px;
             margin: 0 auto;
+            background-size: cover;
         }
         .section-row .divider{
           visibility: hidden;
         }
 
+        .imageDiv{
+          text-align: center;
+        }
 
 @media (min-width: 768px){
         .header,
@@ -153,37 +161,30 @@
             width: 1px;
             margin: 10px;
         }
+        .about{
+          text-align: right;
+        }
+        .imageDiv{
+          text-align: left;
+        }
+        .self-image{
+          margin: 0;
+        }
 }
+
         </style>
         <div class="body" id="body">
             <div class="header">
               <div class="wrapper">
-                <div class="item">
+                <div class="imageDiv">
                     <div class="self-image"></div>
                     <h1>Sounak Pal</h1>
                     <h2>Senior front end developer</h2>
                 </div>
                 <div class="divider"></div>
-                <div class="item">
-                    <h3>Contact</h3>
-                    <div class="sprite mail"></div>
-                    <a href="mailto:talk2sounak@gmail.com">talk2sounak@gmail.com</a>
-                    <div class="sprite phone"></div>
-                    <a href="tel:+91(0)8600544489">+91(0)8600544489</a>
-                </div>
-                <div class="divider"></div>
-                <div class="item">
-                    <h3>Social</h3>
-                    <div class="header">
-                        <a target="_blank" href="" href="https://www.facebook.com/palsounak" class="sprite facebook"></a>
-                        <a target="_blank" href="https://github.com/sounakpal/" class="sprite github"></a>
-                        <a target="_blank" href="https://in.linkedin.com/in/sounakpal" class="sprite linkedIn"></a>
-                    </div>
-                    <div class="header">
-                        <a target="_blank" href="https://plus.google.com/u/0/+SounakPalUI/posts" class="sprite google"></a>
-                        <a target="_blank" href="https://twitter.com/sounakpal" class="sprite twitter"></a>
-                        <a target="_blank" href="skype:sounak.pal?call" class="sprite skype"></a>
-                    </div>
+                <div class="item about">
+                    <h3>About</h3>
+                <p>A self-taught UI Developer with 6 Yrs of experience in developing highly scalable, performance optimized web applications with pixel-perfect integration. Recently working on a few Travel APIs and integrating them with PolymerJS creating WebComponents. I'm looking for a company working on cutting-edge technologies & focused on quality, where I can develop and implement my expertise.</p>
                 </div>
                 </div>
             </div>
