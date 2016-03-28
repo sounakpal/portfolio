@@ -142,6 +142,7 @@ gulp.task('images', function() {
 gulp.task('copy', function() {
   var app = gulp.src([
     'app/*',
+    'app/sounak-resume.docx',
     '!app/test',
     '!app/elements',
     '!app/bower_components',

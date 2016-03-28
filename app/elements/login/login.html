@@ -190,7 +190,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         <div class="wrapper">
                             <div class="item">
                                 <div class="self-image"></div>
-                                    <h2>Hey feel free to drop me a line, even just to say hello !</h2>
+                                    <h2>Hello [[currentUserName]],<br> feel free to drop me a line,<br> even just to say hello !</h2>
                             </div>
                             <div class="divider"></div>
                             <div class="item">
@@ -212,7 +212,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                 <div class="divider"></div>
                                 <div class="item">
                                   <h3>Download CV</h3>
-                                    <a target="_blank" href="1.png" class="sprite download" download="1"></a>
+                                    <a target="_blank" href="../../sounak-resume.docx" class="sprite download" download="souank-resume"></a>
                                 </div>
                             </div>
                         </div>
@@ -333,6 +333,7 @@ Polymer({
         usersRef.child(uid).update(userObject);
 
         this.currentUserImageUrl = userObject.photo;
+        this.currentUserName = userObject.fullName;
     },
 
     computeLoginHidden: function(statusKnown, user) {
