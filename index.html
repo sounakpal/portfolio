@@ -72,7 +72,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <span id="browser-sync-binding"></span>
   <template is="dom-bind" id="app">
 
-    <e-menu base-url="{{baseUrl}}" selected="[[route]]"></e-menu>
     <iron-pages attr-for-selected="name"  >
         <div name="home" id="home">
         </div>
@@ -85,11 +84,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div name="login" id="login">
         </div>
     </iron-pages>
-
+    <e-menu base-url="{{baseUrl}}" selected="[[route]]"></e-menu>
+<!-- 
     <paper-toast id="toast">
       <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
     </paper-toast>
-
+ -->
     <!-- Uncomment next block to enable Service Worker support (1/2) -->
    <!--  <paper-toast id="caching-complete"
                 duration="6000"
